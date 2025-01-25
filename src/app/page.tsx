@@ -1,10 +1,7 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import Image from "next/image";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Card, CardHeader, CardContent, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star } from "lucide-react";
 import { product } from "./types/product";
 import ProductCard from "@/components/cardProduct";
 import { CarouselWithProducts } from "./types/CarouselWithProducts";
