@@ -30,56 +30,56 @@ export default async function Home() {
 
   const carousels: CarouselWithProducts[] = [
     {
-      title: "OFERTAS DO DIA",
+
       id: 1,
     },
     {
-      title: "DESTAQUES EM TECNOLOGIA",
+
       id: 2,
 
     },
     {
-      title: "NOVIDADES",
+
       id: 3,
     }
   ]
 
   return (
     <div className="p-0 m-0 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start z-0">
-        <div className="absolute h-[80vh] inset-0">
-          <AspectRatio ratio={16 / 9} className="h-[80vh] border-b-2 bg-neutral-50 border-primary">
+      <main className="flex flex-col gap-0 row-start-2 items-center sm:items-start z-0">
+        <div className="absolute inset-0">
+          <AspectRatio ratio={16 / 9} className="border-b-2 bg-neutral-50 border-primary">
 
           </AspectRatio>
-        </div>{carousels.map((carousel) => (
-          <div key={carousel.id} className="w-full z-[1] md:h-[80vh]">
-            <div className="m-auto w-full flex flex-col p-4 max-w-7xl mx-auto justify-center my-28 z-[1] rounded-lg">
-              <h1 className="flex flex-row font-bold text-lg p-2 text-white bg-primary rounded-lg">
-                <Star fill="white" className="white mx-2" />
-                {carousel.title}
-              </h1>
-              <Carousel opts={{
-                align: "start",
-                loop: true,
-              }} className="m-auto w-full justify-center h-full">
-                <CarouselContent className="m-auto gap-1 py-4">
-                  {products.map((product) => (
+        </div>
+        <div className="flex w-full flex-col p-0 mx-auto mt-24">{carousels.map((carousel) => (
+          <div key={carousel.id} className="w-full z-[1]">
+            <div className="m-auto w-full flex flex-col px-4 max-w-7xl mx-auto justify-center z-[1] rounded-lg">
+              {carousel.title ?
+                <h1 className="flex flex-row font-bold text-lg p-2 text-white bg-primary rounded-lg">
+                  <Star fill="white" className="white mx-2" />
+                  {carousel.title}
+                </h1> : ""}
+              <div className="m-auto w-full grid grid-cols-5 justify-center h-full">
 
-                    <CarouselItem key={product.id} className="sm:basis-1/3 md:basis-1/4 lg:basis-1/6 flex justify-center items-center aspect-square rounded-xl">
-                      <Link className="m-0" href="/">
-                        <ProductCard product={product} />
-                      </Link>
-                    </CarouselItem>
+                {products.slice(0, 5).map((product) => (
 
-                  ))}
-                </ CarouselContent>
+                  <div key={product.id} className="sm:basis-1/3 py-1 mx-1 md:basis-1/3 lg:basis-1/5 justify-center items-center aspect-square rounded-xl">
 
-              </Carousel>
+                    <ProductCard product={product} productLink={`product/${product.id}`} />
+
+
+                  </div>
+
+                ))}
+
+              </div>
 
             </div>
           </div>
 
         ))}
+        </div>
       </main>
     </div>
   );

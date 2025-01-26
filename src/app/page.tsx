@@ -59,9 +59,9 @@ export default async function Home() {
                                     {products.map((product) => (
 
                                         <CarouselItem key={product.id} className="sm:basis-1/3 md:basis-1/4 lg:basis-1/6 flex justify-center items-center aspect-square rounded-xl">
-                                            <Link className="m-0" href="/">
-                                                <ProductCard product={product} />
-                                            </Link>
+
+                                            <ProductCard product={product} productLink={`product/${product.id}`} />
+
                                         </CarouselItem>
 
                                     ))}

@@ -1,5 +1,5 @@
 export interface CarouselWithProducts {
 
-    title: string,
+    title?: string,
     id: number,
 }
