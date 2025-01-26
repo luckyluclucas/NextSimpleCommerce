@@ -25,6 +25,7 @@ export default function Header() {
 
     }[] = [
             { title: "Home", href: "/", hasDropDownMenu: false },
+            { title: "Products", href: "/product", hasDropDownMenu: false },
 
             {
                 title: "About Us",
