@@ -106,8 +106,8 @@ export default function Header() {
                         <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <button onClick={handleMenuOpening} className={`relative ml-auto justify-end flex h-10 w-10 shrink-0 overflow-hidden rounded-full transition-all duration-200 ease-in-out bg-primary ${isOpen ? 'bg-accent rounded-full' : 'rounded-full'}`}>
-                        {isOpen ? <X size={20} className="text-white m-auto" /> : <Menu size={20} className=" text-white m-auto" />}
+                    <button onClick={handleMenuOpening} className={`relative ml-auto justify-end flex h-10 w-10 shrink-0 overflow-hidden border-primary border rounded-full transition-all duration-200 ease-in-out ${isOpen ? 'rounded-full' : 'rounded-full'}`}>
+                        {isOpen ? <X size={22} className="text-primary m-auto" /> : <Menu size={22} className=" text-primary m-auto" />}
                     </button>
                 </div>
             </div>
