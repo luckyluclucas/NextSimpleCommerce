@@ -66,9 +66,9 @@ export default function Header() {
                         <NavigationMenuList>
                             {menuItens.map((menuItem) => (
 
-                                <NavigationMenuItem className={`my-auto hover:scale-[1.02] hover:bg-primary/70 hover:text-white rounded-full ease-in-out duration-200 select-none no-drag text-nowrap mx-2 justify-center  font-semibold transition-all`} key={menuItem.href}>
+                                <NavigationMenuItem className={`my-auto hover:scale-[1.08] hover:text-primary hover:font-extrabold rounded-full ease-in-out duration-300 select-none no-drag text-nowrap mx-2 justify-center  font-semibold transition-all`} key={menuItem.href}>
                                     <Link key={menuItem.href} className=" " href={menuItem.href}>
-                                        <NavigationMenuTrigger noArrow={!menuItem.hasDropDownMenu} className={`${router === menuItem.href ? 'bg-primary text-white' : 'bg-transparent'} rounded-full`}>
+                                        <NavigationMenuTrigger noArrow={!menuItem.hasDropDownMenu} className={`${router === menuItem.href ? 'text-primary' : 'bg-transparent'} rounded-full`}>
 
                                             <span className="rounded transition-all ease-in-out duration-200 p-2">{menuItem.title}</span>
 
