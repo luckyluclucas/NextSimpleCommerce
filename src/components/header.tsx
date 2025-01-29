@@ -61,7 +61,7 @@ export default function Header() {
     const router = usePathname()
     return (
 
-        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-10`}>
+        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-0 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-10`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
                 <div className="md:flex flex-1 hidden text-xl grow-2 list-none">
                     <NavigationMenu className="gap-2">
