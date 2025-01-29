@@ -52,33 +52,29 @@ export default async function Home() {
 
           </AspectRatio>
         </div>
-        <div className="flex w-full flex-col p-0 mx-auto mt-24">{carousels.map((carousel) => (
-          <div key={carousel.id} className="w-full z-[1]">
-            <div className="m-auto w-full flex flex-col px-4 max-w-7xl mx-auto justify-center z-[1] rounded-lg">
-              {carousel.title ?
-                <h1 className="flex flex-row font-bold text-lg p-2 text-white bg-primary rounded-lg">
-                  <Star fill="white" className="white mx-2" />
-                  {carousel.title}
-                </h1> : ""}
-              <div className="m-auto w-full grid grid-cols-5 justify-center h-full">
+        <div className="flex w-full flex-col p-0 mx-auto mt-24">
 
-                {products.slice(0, 5).map((product) => (
+          <div className="w-full z-[1]">
+            <div className="m-auto w-full flex flex-col px-4 max-w-7xl mx-auto justify-center z-[1] rounded-lg">
+
+              <div className="m-auto w-full grid grid-cols-5 justify-center h-full">{
+
+                products.map((product) => (
 
                   <div key={product.id} className="sm:basis-1/3 py-1 mx-1 md:basis-1/3 lg:basis-1/5 justify-center items-center aspect-square rounded-xl">
 
-                    <ProductCard product={product} productLink={`product/${product.id}`} />
+                    <ProductCard product={product} productLink={`/product/${product.id}`} />
 
 
                   </div>
 
-                ))}
+                ))
+              }
 
               </div>
 
             </div>
           </div>
-
-        ))}
         </div>
       </main>
     </div>

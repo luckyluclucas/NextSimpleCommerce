@@ -92,6 +92,21 @@ const products: product[] = [
     },
 ]
 
-export async function GET() {
-    return NextResponse.json(products, { status: 200 })
+export async function GET(request: NextRequest, { params }: {
+    params: {
+        id: string
+    }
+}) {
+    const productId = parseInt(params.id)
+    if (isNaN(productId)) {
+        NextResponse.json({ error: "id inválido" }, { status: 400 })
+    }
+
+    const productData = products.find((p) => p.id === productId)
+
+    if (!productData) {
+        return NextResponse.json({ error: "produto não econtrado" }, { status: 404 })
+    }
+
+    return NextResponse.json(productData, { status: 200 })
 }

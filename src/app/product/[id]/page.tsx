@@ -1,26 +1,45 @@
 import { product } from "@/app/types/product"
+import { NextResponse } from "next/server";
 
-async function GetProductData(id: string) {
+async function GetProductData<product>(id: number): Promise<product | undefined> {
     try {
-        const data = await fetch(`${process.env.URL}/produtos/${id}`)
-        const product: product = await data.json()
-        return product
+        const response = await fetch(`${process.env.URL}/api/products/${id}`)
+        if (!response.ok) {
+            console.error(`Erro ao buscar o produto: ${response.statusText}`);
+            return undefined
+        }
+
+        const product: product = await response.json();
+        return product;
     } catch (error) {
-        console.log(error)
-        console.log('failed at fetching data')
+        console.error("error at fetching product:", error)
+        return undefined
     }
 }
 
 export default async function productPage({ params }: {
 
-    params: Promise<{ id: string }>
+    params: { id: string }
 }) {
-    const id = (await params).id;
+
+    const id = parseInt((await params).id);
+
+    if (isNaN(id)) {
+        return NextResponse.json({ error: "it's not a id" }, { status: 400 })
+    }
+    const ProductData: product = (await GetProductData(id)) ?? {
+        id: 0,
+        title: "Produto não encontrado",
+        description: "Este produto não está disponível.",
+        imageSrc: "/placeholder.jpg",
+        price: "0",
+    };
+
     return (
         <div className="h-screen flex bg-blue-500 m-0 font-[family-name:var(--font-geist-sans)]">
             { }
             <div className="mt-24">
-                <h1 className="bg-blue-700 text-white">{id}</h1>
+                <h1 className="bg-blue-700 text-white">{ProductData.id}</h1>
             </div>
         </div >
     )
