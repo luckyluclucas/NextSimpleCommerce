@@ -1,7 +1,7 @@
 import { product } from "./product";
 
-type cartItem = product & {
+export default interface cartItem {
+    product: product;
     quantity: number;
+    productId: product["id"];
 }
-
-export default cartItem
