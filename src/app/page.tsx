@@ -20,11 +20,11 @@ async function GetProducts(): Promise<product[]> {
 
 const carousels: CarouselWithProducts[] = [
     {
-        title: "promotions",
+        title: "PROMOTIONS",
         id: 1
     },
     {
-        title: "releases",
+        title: "RELEASES",
         id: 2
     }
 ]
@@ -34,7 +34,7 @@ export default async function Home() {
     const products = await GetProducts()
 
     return (
-        <div className="flex flex-col p-0 m-0">
+        <div className="flex flex-col p-0 m-0 w-full">
 
             <div className="w-full h-[400px] absolute flex mt-14">
                 <Image src="https://images.unsplash.com/photo-1491166617655-0723a0999cfc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmljZXxlbnwwfHwwfHx8MA%3D%3D"
@@ -47,8 +47,8 @@ export default async function Home() {
                 {carousels.map((carousel) => (
                     <div key={carousel.id} className="w-full z-[1] md:h-[80vh]">
                         <div className="m-auto w-full flex flex-col p-4 max-w-7xl mx-auto justify-center my-28 z-[1] rounded-lg">
-                            <h1 className="flex flex-row font-bold text-lg p-2 text-white bg-primary rounded-lg">
-                                <Star fill="white" className="white mx-2" />
+                            <h1 className="flex flex-row w-full font-bold text-lg px-1 mx-0 text-primary rounded py-2 border-b border-primary">
+                                <Star fill="hsl(346.8, 77.2%, 49.8%)" className="white mr-2" />
                                 {carousel.title}
                             </h1>
                             <Carousel opts={{
