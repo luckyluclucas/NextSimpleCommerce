@@ -5,6 +5,9 @@ import { Button } from "./ui/button"
 import { ShoppingCart } from "lucide-react"
 import { product } from "@/app/types/product"
 import Link from "next/link"
+import useCart from "@/hooks/useCart"
+import { useEffect } from "react"
+import cartItem from "@/app/types/cartItem"
 
 interface ProductCardProps {
     product: product;
@@ -15,6 +18,11 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
 
+    const { addToCart, cart } = useCart()
+
+    useEffect(() => {
+        console.log(cart)
+    }, [cart])
 
     return (
         <Card className="aspec-[3/4] hover:bg-secondary flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
@@ -42,8 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
 
                 </CardHeader>
             </Link>
-            <Button onClick={() => { console.log("button clicked") }} className="m-1"><ShoppingCart />Comprar</Button>
-
+            <Button onClick={() => { addToCart(product) }} className="m-1"><ShoppingCart />Comprar</Button>
         </Card>
 
 
