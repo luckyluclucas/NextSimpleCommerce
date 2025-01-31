@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import CartContextProvider from "./contexts/CartContextProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
   description: "Shop that ak here, all support to the terrorists",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -28,9 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable}antialiased w-full font-[family-name:var(--font-geist-sans)]`}
       >
-        <Header />
+        <CartContextProvider>
+          <Header />
 
-        {children}
+          {children}
+        </CartContextProvider>
       </body>
     </html>
   );
