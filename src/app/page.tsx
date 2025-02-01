@@ -43,10 +43,10 @@ export default async function Home() {
                 </Image >
 
             </div>
-            <div className="flex flex-col mt-[486px]">
+            <div className="flex flex-col z-10 mt-[466px]">
                 {carousels.map((carousel) => (
                     <div key={carousel.id} className="w-full mb-8 z-[1]">
-                        <div className="m-auto w-full flex flex-col max-w-7xl mx-auto justify-center z-[1] rounded-lg">
+                        <div className="m-auto bg-white w-full flex flex-col max-w-7xl mx-auto justify-center z-[1] rounded-lg">
                             <h1 className="flex flex-row w-full font-bold text-lg px-1 mx-0 text-primary rounded py-2 border-b border-primary">
                                 <Star fill="hsl(346.8, 77.2%, 49.8%)" className="white mr-2" />
                                 {carousel.title}
