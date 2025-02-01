@@ -50,7 +50,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
 
                 </CardHeader>
             </Link>
-            <Button onClick={() => { addToCart(product) }} className="m-1"><ShoppingCart />Comprar</Button>
+            <div className="m-1">
+                <Button onClick={() => { addToCart(product) }} className="w-full h-full"><ShoppingCart />Comprar</Button>
+            </div>
         </Card>
 
 
