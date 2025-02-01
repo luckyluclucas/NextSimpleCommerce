@@ -54,8 +54,8 @@ export default async function Home() {
         </div>
         <div className="flex w-full flex-col p-0 mx-auto mt-24">
 
-          <div className="w-full z-[1]">
-            <div className="m-auto w-full flex flex-col px-4 max-w-7xl mx-auto justify-center z-[1] rounded-lg">
+          <div className="w-full z-1">
+            <div className="m-auto w-full flex flex-col px-4 max-w-7xl mx-auto justify-center z-1 rounded-lg">
 
               <div className="m-auto w-full grid grid-cols-5 justify-center h-full">{
 
