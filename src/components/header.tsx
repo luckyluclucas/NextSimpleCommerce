@@ -54,7 +54,7 @@ export default function Header() {
 
     useEffect(() => {
         const handleHeaderBG = () => {
-            setIsAtTop(window.scrollY < 50)
+            setIsAtTop(window.scrollY < 25)
         }
 
         window.addEventListener("scroll", handleHeaderBG)
