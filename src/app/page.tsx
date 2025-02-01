@@ -67,8 +67,8 @@ export default async function Home() {
                                     ))}
                                 </ CarouselContent>
 
-                                <CarouselNext variant="secondary" />
-                                <CarouselPrevious variant="secondary" />
+                                <CarouselNext variant="secondary" className="hidden md:flex" />
+                                <CarouselPrevious variant="secondary" className="hidden md:flex" />
 
                             </Carousel>
                         </div>
