@@ -1,11 +1,12 @@
 "use client";
 import Link from "next/link";
 import SearchBar from "@/components/comp-27";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { NavigationMenu, NavigationMenuList, NavigationMenuLink, NavigationMenuContent, NavigationMenuItem, NavigationMenuTrigger } from "./ui/navigation-menu";
+import useCart from "@/hooks/useCart";
 
 export default function Header() {
 
@@ -58,10 +59,14 @@ export default function Header() {
 
         window.addEventListener("scroll", handleHeaderBG)
     }, [])
+
+    const { cart } = useCart()
+    const numberOfProductsOnCart = cart.reduce((total, cartItem) => { return total += cartItem.quantity }, 0)
+
     const router = usePathname()
     return (
 
-        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-0 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-10`}>
+        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-0 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-20`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
                 <div className="md:flex flex-1 hidden text-xl grow-2 list-none">
                     <NavigationMenu className="gap-2">
@@ -108,8 +113,14 @@ export default function Header() {
                         <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <button onClick={handleMenuOpening} className={`relative ml-auto justify-end flex h-10 w-10 shrink-0 overflow-hidden border-primary border rounded-full transition-all duration-200 ease-in-out ${isOpen ? 'rounded-full' : 'rounded-full'}`}>
-                        {isOpen ? <X size={22} className="text-primary m-auto" /> : <Menu size={22} className=" text-primary m-auto" />}
+                    <button onClick={handleMenuOpening} className={`relative ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-200 ease-in-out ${isOpen ? 'border-primary border rounded-full' : 'border-none'}`}>
+                        {isOpen ? <X size={26} className="text-primary m-auto" /> : <Menu size={30} className=" text-primary border-none m-auto" />}
+                    </button>
+                    <button className="flex flex-row px1-1">
+                        <ShoppingCart color="hsl(346.8, 77.2%, 49.8%)" size={30} className="my-1 ml-1" />
+                        <div className={`rounded-full w-5 h-5 text-sm content-center text-white ${numberOfProductsOnCart > 0 ? "bg-primary" : ""} `}>
+                            {numberOfProductsOnCart === 0 ? "" : numberOfProductsOnCart}
+                        </div>
                     </button>
                 </div>
             </div>
