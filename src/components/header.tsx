@@ -117,7 +117,7 @@ export default function Header() {
                         {isOpen ? <X size={26} className="text-primary m-auto" /> : <Menu size={30} className=" text-primary border-none m-auto" />}
                     </button>
                     <button className="flex flex-row px1-1">
-                        <ShoppingCart color="hsl(346.8, 77.2%, 49.8%)" size={30} className="my-1 ml-1" />
+                        <ShoppingCart color="hsl(346.8, 77.2%, 49.8%)" fill={`${numberOfProductsOnCart > 0 ? "hsl(346.8, 77.2%, 49.8%)" : "transparent"}`} size={30} className="my-1 ml-1 transition-all ease-in-out duration-200" />
                         <div className={`rounded-full w-5 h-5 text-sm content-center text-white ${numberOfProductsOnCart > 0 ? "bg-primary" : ""} `}>
                             {numberOfProductsOnCart === 0 ? "" : numberOfProductsOnCart}
                         </div>
