@@ -72,6 +72,10 @@ export default function Header() {
         <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-0 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-20`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
                 <div className="md:flex flex-1 hidden text-xl grow-2 list-none">
+                    <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
                     <NavigationMenu className="gap-2">
                         <NavigationMenuList>
                             {menuItens.map((menuItem) => (
@@ -112,18 +116,10 @@ export default function Header() {
                 </div>
                 <div className=" flex flex-1 gap-4">
 
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <button onClick={handleMenuOpening} className={`relative ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-200 ease-in-out ${isOpen ? 'border-primary border rounded-full' : 'border-none'}`}>
-                        {isOpen ? <X size={26} className="text-primary m-auto" /> : <Menu size={30} className=" text-primary border-none m-auto" />}
-                    </button>
-
                     <HoverCard openDelay={40}>
 
                         <HoverCardTrigger className="flex flex-row" href="/products">
-                            <ShoppingCart color="hsl(346.8, 77.2%, 49.8%)" fill={`${numberOfProductsOnCart > 0 ? "hsl(346.8, 77.2%, 49.8%)" : "transparent"}`} size={30} className="my-1 ml-1 rotate-y-180 transition-all ease-in-out duration-200" />
+                            <ShoppingCart color="hsl(346.8, 77.2%, 49.8%)" fill={`${numberOfProductsOnCart > 0 ? "hsl(346.8, 77.2%, 49.8%)" : "transparent"}`} size={30} className="my-1 ml-1 rotate-y-180 content-end transition-all ease-in-out duration-200" />
                             <div className={`rounded-full w-5 h-5 text-sm flex content-center items-center justify-center m-auto text-white ${numberOfProductsOnCart > 0 ? "bg-primary" : ""} `}>
                                 {numberOfProductsOnCart === 0 ? "" : numberOfProductsOnCart}
                             </div>
@@ -136,6 +132,10 @@ export default function Header() {
                                 <ScrollBar orientation="vertical" />
                             </ScrollArea>
                         </HoverCardContent>
+
+                        <button onClick={handleMenuOpening} className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-200 ease-in-out ${isOpen ? 'border-primary border rounded-full' : 'border-none'}`}>
+                            {isOpen ? <X size={26} className="text-primary m-auto" /> : <Menu size={30} className=" text-primary border-none m-auto" />}
+                        </button>
 
                     </HoverCard>
 
