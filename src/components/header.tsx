@@ -84,7 +84,7 @@ export default function Header() {
                                     <Link key={menuItem.href} className=" " href={menuItem.href}>
                                         <NavigationMenuTrigger noArrow={!menuItem.hasDropDownMenu} className={`${router === menuItem.href ? 'text-primary' : 'bg-transparent'} rounded-full`}>
 
-                                            <span className="rounded transition-all ease-in-out duration-200 p-2">{menuItem.title}</span>
+                                            <span className="cursor-pointer rounded transition-all ease-in-out duration-200 p-2">{menuItem.title}</span>
 
                                         </NavigationMenuTrigger>
                                     </Link>
