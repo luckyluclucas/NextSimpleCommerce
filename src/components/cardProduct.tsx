@@ -51,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
                 </CardHeader>
             </Link>
             <div className="m-1">
-                <Button onClick={() => { addToCart(product) }} className="w-full h-full"><ShoppingCart />Comprar</Button>
+                <Button onClick={() => { addToCart(product) }} className="cursor-pointer w-full h-full"><ShoppingCart />Comprar</Button>
             </div>
         </Card>
 
