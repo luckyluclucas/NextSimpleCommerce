@@ -10,16 +10,17 @@ import useCart from "@/hooks/useCart";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import ProductCard from "./cardProduct";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { useSidebar } from "./ui/sidebar";
 
 export default function Header() {
 
-    const [isOpen, setIsOpen] = useState(false);
-
     const handleMenuOpening = () => {
-        setIsOpen(!isOpen);
+        toggleSidebar()
     };
     const pathName = usePathname()
     const isHomePage = pathName === "/";
+
+    const { toggleSidebar, open } = useSidebar()
 
     const menuItens: {
         title: string;
@@ -133,8 +134,8 @@ export default function Header() {
                             </ScrollArea>
                         </HoverCardContent>
 
-                        <button onClick={handleMenuOpening} className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-200 ease-in-out ${isOpen ? 'border-primary border rounded-full' : 'border-none'}`}>
-                            {isOpen ? <X size={26} className="text-primary m-auto" /> : <Menu size={30} className=" text-primary border-none m-auto" />}
+                        <button onClick={handleMenuOpening} className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-200 ease-in-out ${open ? 'border-primary border rounded-full' : 'border-none'}`}>
+                            {open ? <X size={26} className="text-primary m-auto" /> : <Menu size={30} className=" text-primary border-none m-auto" />}
                         </button>
 
                     </HoverCard>
