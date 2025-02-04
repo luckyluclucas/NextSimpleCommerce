@@ -125,13 +125,15 @@ export default function Header() {
                                 {numberOfProductsOnCart === 0 ? "" : numberOfProductsOnCart}
                             </div>
                         </HoverCardTrigger>
-                        <HoverCardContent className="z-20 h-max-[400px] overflow-auto flex flex-col">
-                            <ScrollArea className="z-20 h-[400px] flex flex-col">
-                                <div className="">
-                                    {cart.map((p) => (<div key={p.product.id}><ProductCard product={p.product} productLink="" /></div>))}
-                                </div>
-                                <ScrollBar orientation="vertical" />
-                            </ScrollArea>
+                        <HoverCardContent className={`z-20 ${cart.length === 0 ? 'w-fit h-[60px]' : 'h-[400px]'} overflow-auto flex flex-col`}>
+                            {cart.length === 0 ? <span className="m-auto">Empty Cart</span> :
+                                <ScrollArea className={`z-20 h-[400px] content-center m-auto flex flex-col`}>
+                                    <div className="min-h-12">
+                                        {cart.map((p) => (<div key={p.product.id}><ProductCard product={p.product} productLink="" /></div>))}
+                                    </div>
+                                    <ScrollBar orientation="vertical" />
+                                </ScrollArea>
+                            }
                         </HoverCardContent>
 
                         <button onClick={handleMenuOpening} className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-400 ease-in-out ${open ? 'invisible opacity-0 translate-x-[20px]' : 'translate-x-0 opacity-100'}`}>
