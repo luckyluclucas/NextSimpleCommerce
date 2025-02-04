@@ -1,10 +1,6 @@
 import Image from "next/image"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import Link from "next/link"
-import ProductCard from "@/components/cardProduct"
 import { product } from "./types/product"
-import { CarouselWithProducts } from "./types/CarouselWithProducts"
-import { Star } from "lucide-react"
+import CarouselWithProduct from "@/components/CarouselWithProducts"
 
 async function GetProducts(): Promise<product[]> {
     try {
@@ -18,20 +14,11 @@ async function GetProducts(): Promise<product[]> {
     }
 }
 
-const carousels: CarouselWithProducts[] = [
-    {
-        title: "PROMOTIONS",
-        id: 1
-    },
-    {
-        title: "RELEASES",
-        id: 2
-    }
-]
 
 export default async function Home() {
 
     const products = await GetProducts()
+
 
     return (
         <div className="flex flex-col m-0 w-full">
@@ -44,37 +31,7 @@ export default async function Home() {
 
             </div>
             <div className="flex flex-col p-4 z-10 mt-[466px]">
-                {carousels.map((carousel) => (
-                    <div key={carousel.id} className="w-full mb-8 z-1">
-                        <div className="m-auto bg-white w-full flex flex-col max-w-7xl mx-auto justify-center z-1 rounded-lg">
-                            <h1 className="flex flex-row w-full font-bold text-lg px-1 mx-0 text-primary rounded p-2 border-l-8 border-primary">
-                                <Star fill="hsl(346.8, 77.2%, 49.8%)" className="white mr-2" />
-                                {carousel.title}
-                            </h1>
-                            <Carousel opts={{
-                                align: "start",
-                                loop: true,
-                            }} className="m-auto w-full justify-center h-full">
-                                <CarouselContent className="m-auto ml[-4px] py-4">
-                                    {products.map((product) => (
-
-                                        <CarouselItem key={product.id} className="sm:basis-1/3 pl-1 md:basis-1/4 lg:basis-1/6 flex justify-center items-center aspect-square rounded-xl">
-
-                                            <ProductCard product={product} productLink={`product/${product.id}`} />
-
-                                        </CarouselItem>
-
-                                    ))}
-                                </ CarouselContent>
-
-                                <CarouselNext variant="secondary" className="hidden md:flex" />
-                                <CarouselPrevious variant="secondary" className="hidden md:flex" />
-
-                            </Carousel>
-                        </div>
-                    </div>
-
-                ))}
+                <CarouselWithProduct products={products} />
             </div>
 
 
