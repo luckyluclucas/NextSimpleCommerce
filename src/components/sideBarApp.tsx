@@ -163,12 +163,16 @@ const data = {
 
 export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
+    const IsMobile = useIsMobile()
+    const { toggleSidebar } = useSidebar()
 
     return (
 
-        <Sidebar {...props} className="top-[var(--header-height)] h-[92vh] rounded border-t border-x-12 border-primary bg-white z-20"
+        <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] h-[92vh] rounded border-t border-x-12 border-primary bg-white z-20"
             variant="sidebar"
             collapsible="offcanvas">
+            {IsMobile ? <X color="var(--color-primary)" className="cursor-pointer" onClick={() => { toggleSidebar() }} />
+                : <X size={26} color="var(--color-primary)" className="cursor-pointer" onClick={() => { toggleSidebar() }} />}
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupLabel>Table of Contents</SidebarGroupLabel>
