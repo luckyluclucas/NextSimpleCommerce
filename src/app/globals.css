@@ -5,6 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --header-height: 50px;
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
 
@@ -51,6 +52,14 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
+  /* sidebar styles
+  --sidebar: 210 40% 98%;
+  /* Cor de fundo */
+  --sidebar-foreground: 222 47% 11%;
+  /* Cor do texto */
+  --sidebar-accent: var(--accent);
+  /* Cor de destaque */
+  --sidebar-accent-foreground: 210 40% 98%;
 }
 
 /*
@@ -62,6 +71,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
   *,
   ::after,
   ::before,
@@ -96,7 +106,7 @@
     --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent:  346.8 77.2% 49.8%;
+    --accent: 346.8 77.2% 49.8%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -144,6 +154,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

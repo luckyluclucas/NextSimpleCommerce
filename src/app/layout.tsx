@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import CartContextProvider from "./contexts/CartContextProvider";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import SidebarApp from "@/components/sideBarApp";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ya commerce NIgga",
-  description: "Shop that ak here, all support to the terrorists",
+  title: "SimpleCommerce",
+  description: "Shop here, not there, cause here is better than there",
 };
 
 
@@ -28,12 +30,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable}antialiased w-full font-[family-name:var(--font-geist-sans)]`}
+        className={`${geistSans.variable} ${geistMono.variable}antialiased overflow-x-hidden w-full font-[family-name:var(--font-geist-sans)]`}
       >
         <CartContextProvider>
-          <Header />
-
-          {children}
+          <SidebarProvider defaultOpen={false}>
+            <Header />
+            <SidebarApp side="right" />
+            {children}
+          </SidebarProvider>
         </CartContextProvider>
       </body>
     </html>
