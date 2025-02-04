@@ -34,7 +34,7 @@ export default async function Home() {
     const products = await GetProducts()
 
     return (
-        <div className="flex flex-col p-0 m-0 w-full">
+        <div className="flex flex-col m-0 w-full">
 
             <div className="w-full h-[400px] absolute flex mt-14">
                 <Image src="https://images.unsplash.com/photo-1491166617655-0723a0999cfc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmljZXxlbnwwfHwwfHx8MA%3D%3D"
@@ -43,7 +43,7 @@ export default async function Home() {
                 </Image >
 
             </div>
-            <div className="flex flex-col z-10 mt-[466px]">
+            <div className="flex flex-col p-4 z-10 mt-[466px]">
                 {carousels.map((carousel) => (
                     <div key={carousel.id} className="w-full mb-8 z-1">
                         <div className="m-auto bg-white w-full flex flex-col max-w-7xl mx-auto justify-center z-1 rounded-lg">
