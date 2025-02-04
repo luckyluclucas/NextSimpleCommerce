@@ -54,7 +54,7 @@ export default function Header() {
             }
         ];
 
-    const [isAtTop, setIsAtTop] = useState<boolean>(true)
+    const [isAtTop, setIsAtTop] = useState<boolean>(false)
 
     useEffect(() => {
         const handleHeaderBG = () => {
@@ -70,12 +70,12 @@ export default function Header() {
     const router = usePathname()
     return (
 
-        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-0 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-20`}>
+        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-20`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
                 <div className="md:flex flex-1 hidden text-xl grow-2 list-none">
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarFallback></AvatarFallback>
                     </Avatar>
                     <NavigationMenu className="gap-2">
                         <NavigationMenuList>
@@ -134,8 +134,8 @@ export default function Header() {
                             </ScrollArea>
                         </HoverCardContent>
 
-                        <button onClick={handleMenuOpening} className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-200 ease-in-out ${open ? 'border-primary border rounded-full' : 'border-none'}`}>
-                            {open ? <X size={26} className="text-primary m-auto" /> : <Menu size={30} className=" text-primary border-none m-auto" />}
+                        <button onClick={handleMenuOpening} className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-400 ease-in-out ${open ? 'invisible opacity-0 translate-x-[20px]' : 'translate-x-0 opacity-100'}`}>
+                            < Menu size={30} className="transition-all duration-400 ease-in-out  text-primary border-none m-auto" />
                         </button>
 
                     </HoverCard>
