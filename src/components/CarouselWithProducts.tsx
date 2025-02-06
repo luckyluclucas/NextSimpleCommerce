@@ -21,6 +21,12 @@ export default function CarouselWithProduct({ products }: { products: product[] 
 
     const IsMobile = useIsMobile()
 
+    if (IsMobile) {
+        products = products.slice(0, 3)
+    }
+
+
+
     return (<>{carousels.map((carousel) => (
         <div key={carousel.id} className="w-full mb-8 z-1">
             <div className="m-auto bg-white w-full flex flex-col max-w-7xl mx-auto justify-center z-1 rounded-lg">

@@ -28,24 +28,9 @@ export default async function Home() {
 
   const products = await getProducts();
 
-  const carousels: CarouselWithProducts[] = [
-    {
-
-      id: 1,
-    },
-    {
-
-      id: 2,
-
-    },
-    {
-
-      id: 3,
-    }
-  ]
 
   return (
-    <div className="p-0 m-0 font-[family-name:var(--font-geist-sans)]">
+    <div className="p-0 mx-auto font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-0 row-start-2 items-center sm:items-start z-0">
         <div className="absolute inset-0">
           <AspectRatio ratio={16 / 9} className="border-b-2 bg-neutral-50 border-primary">
