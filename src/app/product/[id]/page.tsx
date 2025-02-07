@@ -83,13 +83,15 @@ export default async function productPage({ params }: {
                             </div>
                             <div className="p-2">
                                 <div className="flex gap-1">
-                                    <span className="font-bold text-5xl text-primary">R$ {ProductData.price}</span>
-                                    <div className="justify-end content-center gap-2 ml-auto items-center align-center flex">
+                                    <span className="font-bold text-5xl line-clamp-none text-primary">R$
+                                        {ProductData.price}
+                                    </span>
+                                    <div className="hidden lg:flex justify-end content-center gap-2 ml-auto items-center align-center">
                                         <Link href={`/carrinho`} className="cursor-pointer">
-                                            <Button size="xlg" className="cursor-pointer">Comprar</Button>
+                                            <Button size="xlg" className="text-xl cursor-pointer">Comprar</Button>
                                         </Link>
 
-                                        <Button size="lg" className="h-14 cursor-pointer">
+                                        <Button className="h-14 cursor-pointer">
                                             <ShoppingCartIcon size={24} className="!size-12 cursor-pointer" />
                                         </Button>
 
