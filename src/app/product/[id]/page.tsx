@@ -4,7 +4,7 @@ import ProductCard from "@/components/cardProduct";
 import Image from "next/image";
 import { Separator } from "@radix-ui/react-separator";
 import { Button } from "@/components/ui/button";
-import { ShoppingCartIcon } from "lucide-react";
+import { ShoppingCartIcon, Truck } from "lucide-react";
 import Link from "next/link";
 
 async function GetProductData<product>(id: number): Promise<product | undefined> {
@@ -44,13 +44,13 @@ export default async function productPage({ params }: {
 
 
     return (
-        <main className="w-full mx-auto mt-[160px]">
+        <main className="w-full p-2 md:p-0 x-auto mt-[160px]">
             <div className="grid grid-rows-[60px_minmax(600px,1fr)_100px] h-[700px] w-full max-w-[1280px] mx-auto font-[family-name:var(--font-geist-sans)]">
                 <h1 className="w-full h-[60px] text-xl font-bold content-center 1 m-auto leading-none">{ProductData.title}</h1>
-                <div className="w-full h-full min-h-0 grid grid-cols-2">
+                <div className="w-full h-full min-h-0 grid grid-rows md:grid-cols-2">
                     <div className="col-span-1 w-auto h-full flex content-center flex-col">
                         <Image width={512} height={312} src={ProductData.imageSrc} alt="" className="justify-self-center m-auto"></Image>
-                        <div className="w-full mt-auto border-2 border-primary flex content-end items-end justify-end h-[100px]"></div>
+                        <div className="w-full mt-auto border-2 border-primary my-2 flex content-end items-end justify-end h-[100px]"></div>
                     </div>
 
                     <div className="col-span-1 w-auto h-full flex flex-col">
@@ -72,16 +72,21 @@ export default async function productPage({ params }: {
 
                         </div>
                         <div className="p-2">
-                            <div className="p-2 gap-2 text-sm flex">
-                                <span> Vendido por seller e entregue por sender </span>
-                                <b>Em estoque</b>
-                                <a className="justify-self-end ml-auto font-semibold"> Mais ofertas</a>
+                            <div className="py-2 gap-2 text-sm hidden lg:flex text-nowrap">
+                                <span className="text-gray-600"> Vendido por seller e entregue por sender </span>
+                                <b className="text-[#1f9050]">Em estoque</b>
+                                <Link href="/product" className="justify-self-end ml-auto font-semibold text-primary">
+                                    Mais ofertas
+                                </Link>
                             </div>
-                            <div className="p-2 gap-2 flex">
-                                <span className="text-base font-semibold">Frete grátis</span>
-                                <span className="text-sm content-center"> - consulte dinsponibilidade</span>
+                            <div className="py-2 gap-1 flex text-nowrap whitespace-nowrap">
+                                <Truck color="#1f9050" />
+                                <b className="text-[#1f9050] text-base mx-1">
+                                    Frete grátis
+                                </b>
+                                <span className="text-sm content-center text-gray-600"> - consulte dinsponibilidade</span>
                             </div>
-                            <div className="p-2">
+                            <div className="py-2">
                                 <div className="flex gap-1">
                                     <span className="font-bold text-5xl line-clamp-none text-primary">R$
                                         {ProductData.price}
@@ -102,7 +107,7 @@ export default async function productPage({ params }: {
                                 <span className="p-2 line-clamp-1 text-sm text-gray-500">ou em até <b className="">10x de R$ {(parseInt(ProductData.price) * 1.2) / 10}</b></span>
                             </div>
                         </div>
-                        <div className="mt-auto">
+                        <div className="mt-auto my-2">
                             <h1>related products</h1>
                             <div className="h-[100px] border-2 border-primary">
                             </div>
