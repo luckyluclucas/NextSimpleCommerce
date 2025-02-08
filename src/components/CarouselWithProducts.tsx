@@ -5,6 +5,7 @@ import ProductCard from "@/components/cardProduct"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Star } from "lucide-react"
 import { product } from "@/app/types/product"
+import slugify from "slugify"
 
 export default function CarouselWithProduct({ products }: { products: product[] }) {
 
@@ -25,8 +26,6 @@ export default function CarouselWithProduct({ products }: { products: product[] 
         products = products.slice(0, 3)
     }
 
-
-
     return (<>{carousels.map((carousel) => (
         <div key={carousel.id} className="w-full mb-8 z-1">
             <div className="m-auto bg-white w-full flex flex-col max-w-7xl mx-auto justify-center z-1 rounded-lg">
@@ -43,7 +42,7 @@ export default function CarouselWithProduct({ products }: { products: product[] 
 
                             <CarouselItem key={product.id} className="sm:basis-1/3 pl-1 md:basis-1/4 lg:basis-1/6 flex justify-center items-center aspect-square rounded-xl">
 
-                                <ProductCard product={product} productLink={`product/${product.id}`} />
+                                <ProductCard product={product} productLink={`product/${product.id}/${slugify(product.title)}`} />
 
                             </CarouselItem>
 

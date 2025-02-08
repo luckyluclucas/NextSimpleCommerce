@@ -5,6 +5,7 @@ import { Star } from "lucide-react";
 import { product } from "../types/product";
 import ProductCard from "@/components/cardProduct";
 import { CarouselWithProducts } from "../types/CarouselWithProducts";
+import slugify from "slugify";
 
 async function getProducts(): Promise<product[]> {
   try {
@@ -48,7 +49,7 @@ export default async function Home() {
 
                   <div key={product.id} className="sm:basis-1/3 py-1 mx-1 md:basis-1/3 lg:basis-1/5 justify-center items-center aspect-square rounded-xl">
 
-                    <ProductCard product={product} productLink={`/product/${product.id}`} />
+                    <ProductCard product={product} productLink={`/product/${product.id}/${slugify(product.title)}`} />
 
 
                   </div>
