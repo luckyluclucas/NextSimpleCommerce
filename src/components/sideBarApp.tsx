@@ -4,13 +4,15 @@ import { X } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import * as React from "react"
+import { menuItens } from "@/app/configs/MenuItens";
+import { usePathname } from "next/navigation";
+import { Separator } from "@radix-ui/react-separator";
 
 import {
     Sidebar,
     SidebarContent,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
@@ -21,180 +23,40 @@ import {
 } from "@/components/ui/sidebar"
 
 // This is sample data.
-const data = {
-    navMain: [
-        {
-            title: "Getting Started",
-            url: "#",
-            items: [
-                {
-                    title: "Installation",
-                    url: "#",
-                },
-                {
-                    title: "Project Structure",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Building Your Application",
-            url: "#",
-            items: [
-                {
-                    title: "Routing",
-                    url: "#",
-                },
-                {
-                    title: "Data Fetching",
-                    url: "#",
-                    isActive: true,
-                },
-                {
-                    title: "Rendering",
-                    url: "#",
-                },
-                {
-                    title: "Caching",
-                    url: "#",
-                },
-                {
-                    title: "Styling",
-                    url: "#",
-                },
-                {
-                    title: "Optimizing",
-                    url: "#",
-                },
-                {
-                    title: "Configuring",
-                    url: "#",
-                },
-                {
-                    title: "Testing",
-                    url: "#",
-                },
-                {
-                    title: "Authentication",
-                    url: "#",
-                },
-                {
-                    title: "Deploying",
-                    url: "#",
-                },
-                {
-                    title: "Upgrading",
-                    url: "#",
-                },
-                {
-                    title: "Examples",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "API Reference",
-            url: "#",
-            items: [
-                {
-                    title: "Components",
-                    url: "#",
-                },
-                {
-                    title: "File Conventions",
-                    url: "#",
-                },
-                {
-                    title: "Functions",
-                    url: "#",
-                },
-                {
-                    title: "next.config.js Options",
-                    url: "#",
-                },
-                {
-                    title: "CLI",
-                    url: "#",
-                },
-                {
-                    title: "Edge Runtime",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Architecture",
-            url: "#",
-            items: [
-                {
-                    title: "Accessibility",
-                    url: "#",
-                },
-                {
-                    title: "Fast Refresh",
-                    url: "#",
-                },
-                {
-                    title: "Next.js Compiler",
-                    url: "#",
-                },
-                {
-                    title: "Supported Browsers",
-                    url: "#",
-                },
-                {
-                    title: "Turbopack",
-                    url: "#",
-                },
-            ],
-        },
-        {
-            title: "Community",
-            url: "#",
-            items: [
-                {
-                    title: "Contribution Guide",
-                    url: "#",
-                },
-            ],
-        },
-    ],
-}
 
 export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     const IsMobile = useIsMobile()
     const { toggleSidebar } = useSidebar()
-
+    const pathname = usePathname()
+    console.log(pathname)
     return (
 
-        <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] h-[92vh] rounded border-t border-x-12 border-primary bg-white z-20"
-            variant="sidebar"
+        <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] drop-shadow-md h-[92vh] border-r border-primary bg-white z-20"
+            variant="inset"
             collapsible="offcanvas">
             {IsMobile ? <X color="var(--color-primary)" className="cursor-pointer" onClick={() => { toggleSidebar() }} />
-                : <X size={26} color="var(--color-primary)" className="cursor-pointer" onClick={() => { toggleSidebar() }} />}
+                : <X size={26} color="var(--color-primary)" className="cursor-pointer ml-auto" onClick={() => { toggleSidebar() }} />}
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Table of Contents</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu className="text-gray-300">
-                            {data.navMain.map((item) => (
+                            {menuItens.map((item) => (
                                 <SidebarMenuItem className="text-gray-300" key={item.title}>
-                                    <SidebarMenuButton asChild>
-                                        <a href={item.url} className="text-gray-800 font-medium">
+                                    <SidebarMenuButton asChild isActive={pathname === item.href ? true : false}>
+                                        <a href={item.href} className="text-gray-800 font-medium">
                                             {item.title}
                                         </a>
                                     </SidebarMenuButton>
-                                    {item.items?.length ? (
+                                    {item.subMenu?.length ? (
                                         <SidebarMenuSub>
-                                            {item.items.map((item) => (
+                                            {item.subMenu.map((item) => (
                                                 <SidebarMenuSubItem key={item.title}>
                                                     <SidebarMenuSubButton
                                                         className="text-gray-600"
                                                         asChild
-                                                        isActive={item.isActive}
                                                     >
-                                                        <a href={item.url}>{item.title}</a>
+                                                        <a href={item.href}>{item.title}</a>
                                                     </SidebarMenuSubButton>
                                                 </SidebarMenuSubItem>
                                             ))}

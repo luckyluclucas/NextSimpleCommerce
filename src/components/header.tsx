@@ -11,6 +11,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import ProductCard from "./cardProduct";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useSidebar } from "./ui/sidebar";
+import { menuItens } from "@/app/configs/MenuItens";
 
 export default function Header() {
 
@@ -22,37 +23,6 @@ export default function Header() {
 
     const { toggleSidebar, open } = useSidebar()
 
-    const menuItens: {
-        title: string;
-        href: string;
-        hasDropDownMenu: boolean;
-        subMenu?: { title: string, href: string }[];
-
-    }[] = [
-            { title: "Home", href: "/", hasDropDownMenu: false },
-
-            { title: "Products", href: "/product", hasDropDownMenu: false },
-
-            {
-                title: "About Us",
-                href: "/about",
-                hasDropDownMenu: true,
-                subMenu: [
-                    { title: "Know Our History", href: "" },
-                    { title: "Know Where we Are", href: "" },
-                ]
-            },
-
-            {
-                title: "Contact Us",
-                href: "/contact",
-                hasDropDownMenu: true,
-                subMenu: [
-                    { title: "WhatsApp", href: "" },
-                    { title: "Send an Email", href: "" },
-                ]
-            }
-        ];
 
     const [isAtTop, setIsAtTop] = useState<boolean>(false)
 

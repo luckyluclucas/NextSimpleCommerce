@@ -34,8 +34,9 @@ export default function RootLayout({
       >
         <CartContextProvider>
           <SidebarProvider defaultOpen={false}>
+
+            <SidebarApp side="left" />
             <Header />
-            <SidebarApp side="right" />
             {children}
           </SidebarProvider>
         </CartContextProvider>
