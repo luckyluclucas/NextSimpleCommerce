@@ -1,6 +1,5 @@
 import { product } from "@/app/types/product"
 import { NextResponse } from "next/server";
-import ProductCard from "@/components/cardProduct";
 import Image from "next/image";
 import { Separator } from "@radix-ui/react-separator";
 import { Button } from "@/components/ui/button";
@@ -49,7 +48,7 @@ export default async function productPage({ params }: {
     const correctTitle = slugify(ProductData.title)
 
     if (title !== correctTitle) {
-        return redirect(`${slugify(correctTitle)}`)
+        return redirect(`/product/${ProductData.id}/${slugify(correctTitle)}`)
     }
 
     return (

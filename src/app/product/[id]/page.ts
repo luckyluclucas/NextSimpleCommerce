@@ -1,14 +1,21 @@
 
-import { redirect } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import { product } from "@/app/types/product"
 import slugify from 'slugify'
 
 const getProductTitle = async (id: number) => {
     try {
-        const res: product = await fetch(`${process.env.URL}/api/products/${id}`).then((res) => res.json())
-        return res
+        const res = await fetch(`${process.env.URL}/api/products/${id}`)
+        if (!res.ok) {
+            console.log('id does not exist')
+            return undefined
+        }
+
+        const product = await res.json()
+        return product
     } catch (error) {
-        return console.log(error)
+        console.log(error)
+        return undefined
     }
 }
 
@@ -16,6 +23,12 @@ export default async function updateURLwithTitle({ params }: { params: { id: num
 
     const { id } = await params
     const p: product = await getProductTitle(id)
-    const titleURL = slugify(p.title)
-    redirect(`${id}/${titleURL}`)
+    if (p) {
+        const titleURL = slugify(p.title)
+        redirect(`/product/${id}/${titleURL}`)
+    } else {
+        console.log('id does not exist')
+        notFound()
+    }
+
 }

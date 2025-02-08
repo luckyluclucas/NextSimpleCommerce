@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { product } from "@/app/types/product";
 
 const products: product[] = [

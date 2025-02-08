@@ -1,10 +1,6 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import Link from "next/link";
-import { Star } from "lucide-react";
 import { product } from "../types/product";
 import ProductCard from "@/components/cardProduct";
-import { CarouselWithProducts } from "../types/CarouselWithProducts";
 import slugify from "slugify";
 
 async function getProducts(): Promise<product[]> {
