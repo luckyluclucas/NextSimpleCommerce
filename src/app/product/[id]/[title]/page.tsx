@@ -6,6 +6,8 @@ import { Separator } from "@radix-ui/react-separator";
 import { Button } from "@/components/ui/button";
 import { ShoppingCartIcon, Truck } from "lucide-react";
 import Link from "next/link";
+import slugify from "slugify";
+import { redirect } from "next/navigation";
 
 async function GetProductData<product>(id: number): Promise<product | undefined> {
     try {
@@ -25,10 +27,11 @@ async function GetProductData<product>(id: number): Promise<product | undefined>
 
 export default async function productPage({ params }: {
 
-    params: { id: string }
+    params: { id: number, title: string }
 }) {
 
-    const id = parseInt((await params).id);
+
+    const { id } = await params
 
     if (isNaN(id)) {
         return NextResponse.json({ error: "it's not a id" }, { status: 400 })
@@ -41,7 +44,13 @@ export default async function productPage({ params }: {
         price: "0",
     };
 
+    const { title } = await params
 
+    const correctTitle = slugify(ProductData.title)
+
+    if (title !== correctTitle) {
+        return redirect(`${slugify(correctTitle)}`)
+    }
 
     return (
         <main className="w-full p-2 md:p-0 x-auto mt-[160px]">

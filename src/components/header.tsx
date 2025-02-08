@@ -72,7 +72,7 @@ export default function Header() {
 
         <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-20`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
-                <div className="md:flex flex-1 hidden text-xl grow-2 list-none">
+                <div className="md:flex flex-start max-w-fit hidden text-xl grow-2 list-none">
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
                         <AvatarFallback></AvatarFallback>
@@ -115,7 +115,7 @@ export default function Header() {
 
                     </SearchBar>
                 </div>
-                <div className=" flex flex-1 gap-4">
+                <div className=" flex flex-end gap-4">
 
                     <HoverCard openDelay={40}>
 

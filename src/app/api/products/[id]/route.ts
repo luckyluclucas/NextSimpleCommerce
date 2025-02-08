@@ -94,10 +94,11 @@ const products: product[] = [
 
 export async function GET(request: NextRequest, { params }: {
     params: {
-        id: string
+        id: number
     }
 }) {
-    const productId = await parseInt(params.id)
+    const { id } = await params
+    const productId = await parseInt(id)
     if (isNaN(productId)) {
         NextResponse.json({ error: "id inválido" }, { status: 400 })
     }
