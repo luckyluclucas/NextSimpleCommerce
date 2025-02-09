@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
 
                     <CardTitle className="text-base h-[3em] font-semibold line-clamp-3">{product.title}</CardTitle>
                     <span className="text-sm mt-4 text-gray-600"><s>R$ {product.price}</s></span>
-                    <span className="text-xl mt-0 text-primary font-semibold rounded py-1 bg-white justify-start mr-auto">R$ {product.price}</span>
+                    <span className="text-xl mt-0 text-primary font-semibold rounded py-1 bg-[var(--background)] justify-start mr-auto">R$ {product.price}</span>
                     <span className="line-clamp-1 mt-0 p-0 text-sm text-gray-500">A vista no PIX</span>
                     <span className="line-clamp-1 mt-0 text-sm text-gray-500">ou em até <b className="">10x de R$ {(parseInt(product.price) * 1.2) / 10}</b></span>
 
@@ -51,7 +51,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
                 </CardHeader>
             </Link>
             <div className="m-1">
-                <Button onClick={() => { addToCart(product) }} className="cursor-pointer w-full h-full"><ShoppingCart />Comprar</Button>
+                <Button onClick={() => { addToCart(product) }} className="cursor-pointer w-full h-full bg-accent hover:bg-primary/70 dark:text-primary dark:hover:text-accent"><ShoppingCart />Comprar</Button>
             </div>
         </Card>
 

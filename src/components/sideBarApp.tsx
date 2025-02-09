@@ -6,7 +6,8 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import * as React from "react"
 import { menuItens } from "@/app/configs/MenuItens";
 import { usePathname } from "next/navigation";
-import { Separator } from "@radix-ui/react-separator";
+import { useTheme } from "next-themes";
+import { MoonIcon, Sun } from "lucide-react";
 
 import {
     Sidebar,
@@ -27,24 +28,35 @@ import {
 export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     const IsMobile = useIsMobile()
+
     const { toggleSidebar } = useSidebar()
+
     const pathname = usePathname()
-    console.log(pathname)
+
+    const { setTheme, theme } = useTheme()
+
     return (
 
-        <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] drop-shadow-md h-[92vh] border-r border-primary bg-white z-20"
+        <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] drop-shadow-md h-[92vh] border-r border-primary dark:border-[#27272a] bg-[var(--background)] z-20"
             variant="inset"
             collapsible="offcanvas">
-            {IsMobile ? <X color="var(--color-primary)" className="cursor-pointer" onClick={() => { toggleSidebar() }} />
-                : <X size={26} color="var(--color-primary)" className="cursor-pointer ml-auto" onClick={() => { toggleSidebar() }} />}
+            <div className="flex flex-row">
+                <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="mb-auto top-0 flex cursor-pointer">
+                    {theme === "light" ? <MoonIcon className="top-0" />
+                        : <Sun color="white" />}
+                </button>
+                {IsMobile ? <X color="var(--color-primary)" className="cursor-pointer" onClick={() => { toggleSidebar() }} />
+                    : <X size={26} color="var(--color-primary)" className="cursor-pointer ml-auto" onClick={() => { toggleSidebar() }} />}
+
+            </div>
             <SidebarContent>
                 <SidebarGroup>
                     <SidebarGroupContent>
-                        <SidebarMenu className="text-gray-300">
+                        <SidebarMenu className="text-gray-300 dark:text-white">
                             {menuItens.map((item) => (
-                                <SidebarMenuItem className="text-gray-300" key={item.title}>
+                                <SidebarMenuItem className="" key={item.title}>
                                     <SidebarMenuButton asChild isActive={pathname === item.href ? true : false}>
-                                        <a href={item.href} className="text-gray-800 font-medium">
+                                        <a href={item.href} className="text-gray-800 dark:text-white font-medium">
                                             {item.title}
                                         </a>
                                     </SidebarMenuButton>
@@ -53,7 +65,7 @@ export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sid
                                             {item.subMenu.map((item) => (
                                                 <SidebarMenuSubItem key={item.title}>
                                                     <SidebarMenuSubButton
-                                                        className="text-gray-600"
+                                                        className="text-gray-600 dark:text-white"
                                                         asChild
                                                     >
                                                         <a href={item.href}>{item.title}</a>

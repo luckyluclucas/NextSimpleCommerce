@@ -2,6 +2,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { product } from "../types/product";
 import ProductCard from "@/components/cardProduct";
 import slugify from "slugify";
+import "../globals.css"
 
 async function getProducts(): Promise<product[]> {
   try {
@@ -30,7 +31,7 @@ export default async function Home() {
     <div className="p-0 mx-auto font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-0 row-start-2 items-center sm:items-start z-0">
         <div className="absolute inset-0">
-          <AspectRatio ratio={16 / 9} className="border-b-2 bg-neutral-50 border-primary">
+          <AspectRatio ratio={16 / 9} className="bg-[var(--background)]">
 
           </AspectRatio>
         </div>

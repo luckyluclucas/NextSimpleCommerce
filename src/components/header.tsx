@@ -12,13 +12,20 @@ import ProductCard from "./cardProduct";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useSidebar } from "./ui/sidebar";
 import { menuItens } from "@/app/configs/MenuItens";
+import { useTheme } from "next-themes";
+
 
 export default function Header() {
 
+    const { setTheme, theme } = useTheme()
+
     const handleMenuOpening = () => {
+
         toggleSidebar()
+
     };
     const pathName = usePathname()
+
     const isHomePage = pathName === "/";
 
     const { toggleSidebar, open } = useSidebar()
@@ -38,12 +45,14 @@ export default function Header() {
     const numberOfProductsOnCart = cart.reduce((total, cartItem) => { return total += cartItem.quantity }, 0)
 
     const router = usePathname()
+    const iconColor = theme === 'dark' ? 'white' : 'hsl(346.8, 77.2%, 49.8%)'
+
     return (
 
-        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white'} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-primary fixed z-20`}>
+        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white dark:bg-black'} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
                 <div className="md:flex flex-start max-w-fit hidden text-xl grow-2 list-none">
-                    <Avatar>
+                    <Avatar onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
                         <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
                         <AvatarFallback></AvatarFallback>
                     </Avatar>
@@ -90,7 +99,7 @@ export default function Header() {
                     <HoverCard openDelay={40}>
 
                         <HoverCardTrigger className="flex flex-row" href="/products">
-                            <ShoppingCart color="hsl(346.8, 77.2%, 49.8%)" fill={`${numberOfProductsOnCart > 0 ? "hsl(346.8, 77.2%, 49.8%)" : "transparent"}`} size={30} className="my-1 ml-1 rotate-y-180 content-end transition-all ease-in-out duration-200" />
+                            <ShoppingCart color={iconColor} fill={`${numberOfProductsOnCart > 0 ? "hsl(346.8, 77.2%, 49.8%)" : "transparent"}`} size={30} className="my-1 ml-1 rotate-y-180 content-end transition-all ease-in-out duration-200" />
                             <div className={`rounded-full w-5 h-5 text-sm flex content-center items-center justify-center m-auto text-white ${numberOfProductsOnCart > 0 ? "bg-primary" : ""} `}>
                                 {numberOfProductsOnCart === 0 ? "" : numberOfProductsOnCart}
                             </div>

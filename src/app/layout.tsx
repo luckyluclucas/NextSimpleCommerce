@@ -3,8 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import CartContextProvider from "./contexts/CartContextProvider";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import SidebarApp from "@/components/sideBarApp";
+import { ThemeProvider } from "./contexts/themeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,16 +31,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable}antialiased overflow-x-hidden w-full font-[family-name:var(--font-geist-sans)]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full font-[family-name:var(--font-geist-sans)]`}
       >
-        <CartContextProvider>
-          <SidebarProvider defaultOpen={false}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <CartContextProvider>
+            <SidebarProvider defaultOpen={false}>
 
-            <SidebarApp side="left" />
-            <Header />
-            {children}
-          </SidebarProvider>
-        </CartContextProvider>
+              <SidebarApp side="left" />
+              <Header />
+              {children}
+            </SidebarProvider>
+          </CartContextProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

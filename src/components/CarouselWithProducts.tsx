@@ -6,6 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import { Star } from "lucide-react"
 import { product } from "@/app/types/product"
 import slugify from "slugify"
+import { useTheme } from "next-themes"
 
 export default function CarouselWithProduct({ products }: { products: product[] }) {
 
@@ -22,15 +23,20 @@ export default function CarouselWithProduct({ products }: { products: product[] 
 
     const IsMobile = useIsMobile()
 
+    const { setTheme, theme } = useTheme()
+
     if (IsMobile) {
         products = products.slice(0, 3)
     }
 
+    const iconColor = theme === 'dark' ? 'white' : 'hsl(346.8, 77.2%, 49.8%)'
+
+
     return (<>{carousels.map((carousel) => (
         <div key={carousel.id} className="w-full mb-8 z-1">
-            <div className="m-auto bg-white w-full flex flex-col max-w-7xl mx-auto justify-center z-1 rounded-lg">
+            <div className="m-auto bg-[var(--background)] w-full flex flex-col max-w-7xl mx-auto justify-center z-1 rounded-lg">
                 <h1 className="flex flex-row w-full font-bold text-lg px-1 mx-0 text-primary rounded p-2 border-l-8 border-primary">
-                    <Star fill="hsl(346.8, 77.2%, 49.8%)" className="white mr-2" />
+                    <Star fill={iconColor} className="white mr-2" />
                     {carousel.title}
                 </h1>
                 <Carousel orientation={`${IsMobile ? 'vertical' : 'horizontal'}`} opts={{
