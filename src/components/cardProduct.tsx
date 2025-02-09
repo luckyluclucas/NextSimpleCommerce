@@ -25,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
     }, [cart])
 
     return (
-        <Card className="aspec-[3/4] mb-12 hover:bg-secondary flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
+        <Card className="aspec-[3/4] mb-12 hover:scale-101 bg-[var(--background)] flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
             <Link href={productLink}>
                 <CardContent className="m-0">
 

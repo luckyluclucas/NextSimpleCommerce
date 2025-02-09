@@ -29,7 +29,7 @@ export default function CarouselWithProduct({ products }: { products: product[] 
         products = products.slice(0, 3)
     }
 
-    const iconColor = theme === 'dark' ? 'white' : 'hsl(346.8, 77.2%, 49.8%)'
+    const iconColor = theme === 'light' ? 'hsl(346.8, 77.2%, 49.8%)' : 'white'
 
 
     return (<>{carousels.map((carousel) => (

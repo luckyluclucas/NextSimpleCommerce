@@ -53,8 +53,8 @@ export default async function productPage({ params }: {
 
     return (
         <main className="w-full p-2 md:p-0 x-auto mt-[160px]">
-            <div className="grid grid-rows-[60px_minmax(600px,1fr)_100px] h-[700px] w-full max-w-[1280px] mx-auto font-[family-name:var(--font-geist-sans)]">
-                <h1 className="w-full h-[60px] text-xl font-bold content-center 1 m-auto leading-none">{ProductData.title}</h1>
+            <div className="grid grid-rows-[120px_minmax(600px,1fr)_100px] h-[700px] w-full max-w-[1280px] mx-auto font-[family-name:var(--font-geist-sans)]">
+                <h1 className="w-full h-[60px] px-1 text-xl font-bold content-center m-auto leading-none">{ProductData.title}</h1>
                 <div className="w-full h-full min-h-0 grid grid-rows md:grid-cols-2">
                     <div className="col-span-1 w-auto h-full flex content-center flex-col">
                         <Image width={512} height={312} src={ProductData.imageSrc} alt="" className="justify-self-center m-auto"></Image>
@@ -62,7 +62,7 @@ export default async function productPage({ params }: {
                     </div>
 
                     <div className="col-span-1 w-auto h-full flex flex-col">
-                        <div className="rounded-lg1 grid grid-rows-2 rounded bg-primary h-40 text-lg font-medium p-4 text-white">
+                        <div className="rounded-lg grid grid-rows-2 rounded bg-primary dark:bg-secondary h-40 text-lg font-medium p-4 text-white">
                             <div className="grid grid-cols-2 content-center">
                                 <div className="">
                                     Promotion
@@ -101,10 +101,10 @@ export default async function productPage({ params }: {
                                     </span>
                                     <div className="hidden lg:flex justify-end content-center gap-2 ml-auto items-center align-center">
                                         <Link href={`/carrinho`} className="cursor-pointer">
-                                            <Button size="xlg" className="text-xl cursor-pointer">Comprar</Button>
+                                            <Button size="xlg" className="text-xl cursor-pointer dark:bg-secondary">Comprar</Button>
                                         </Link>
 
-                                        <Button className="h-14 cursor-pointer">
+                                        <Button className="h-14 cursor-pointer dark:bg-secondary">
                                             <ShoppingCartIcon size={24} className="!size-12 cursor-pointer" />
                                         </Button>
 

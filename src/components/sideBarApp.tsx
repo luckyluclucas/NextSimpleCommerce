@@ -40,12 +40,12 @@ export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sid
         <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] drop-shadow-md h-[92vh] border-r border-primary dark:border-[#27272a] bg-[var(--background)] z-20"
             variant="inset"
             collapsible="offcanvas">
-            <div className="flex flex-row">
+            <div className="flex flex-row my-2">
                 <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="mb-auto top-0 flex cursor-pointer">
                     {theme === "light" ? <MoonIcon className="top-0" />
                         : <Sun color="white" />}
                 </button>
-                {IsMobile ? <X color="var(--color-primary)" className="cursor-pointer" onClick={() => { toggleSidebar() }} />
+                {IsMobile ? <X color="var(--color-primary)" className="cursor-pointer ml-auto" onClick={() => { toggleSidebar() }} />
                     : <X size={26} color="var(--color-primary)" className="cursor-pointer ml-auto" onClick={() => { toggleSidebar() }} />}
 
             </div>

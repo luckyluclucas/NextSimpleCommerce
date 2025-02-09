@@ -45,7 +45,7 @@ export default function Header() {
     const numberOfProductsOnCart = cart.reduce((total, cartItem) => { return total += cartItem.quantity }, 0)
 
     const router = usePathname()
-    const iconColor = theme === 'dark' ? 'white' : 'hsl(346.8, 77.2%, 49.8%)'
+    const iconColor = theme === 'light' ? 'hsl(346.8, 77.2%, 49.8%)' : 'white'
 
     return (
 
@@ -116,7 +116,7 @@ export default function Header() {
                         </HoverCardContent>
 
                         <button onClick={handleMenuOpening} className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-400 ease-in-out ${open ? 'invisible opacity-0 translate-x-[20px]' : 'translate-x-0 opacity-100'}`}>
-                            < Menu size={30} className="transition-all duration-400 ease-in-out  text-primary border-none m-auto" />
+                            < Menu size={30} className="transition-transform duration-400 ease-in-out  text-primary border-none m-auto" />
                         </button>
 
                     </HoverCard>
