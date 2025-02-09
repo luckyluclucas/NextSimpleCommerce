@@ -40,7 +40,7 @@ export default async function Home() {
           <div className="w-full z-1">
             <div className="m-auto w-full flex flex-col px-4 max-w-7xl mx-auto justify-center z-1 rounded-lg">
 
-              <div className="m-auto w-full grid grid-cols-5 justify-center h-full">{
+              <div className="m-auto w-full flex flex-col md:grid md:grid-cols-3 lg:grid-cols-5 justify-center h-full">{
 
                 products.map((product) => (
 

@@ -47,9 +47,10 @@ export default function Header() {
     const router = usePathname()
     const iconColor = theme === 'light' ? 'hsl(346.8, 77.2%, 49.8%)' : 'white'
 
+
     return (
 
-        <header className={`${isHomePage && isAtTop ? 'bg-transparent border-transparent' : 'bg-white dark:bg-black'} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}>
+        <header className={`${isHomePage && isAtTop ? 'bg-white dark:bg-black/90 border-transparent' : 'bg-white dark:bg-black/90'} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
                 <div className="md:flex flex-start max-w-fit hidden text-xl grow-2 list-none">
                     <Avatar onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>

@@ -58,7 +58,7 @@ export default async function productPage({ params }: {
                 <div className="w-full h-full min-h-0 grid grid-rows md:grid-cols-2">
                     <div className="col-span-1 w-auto h-full flex content-center flex-col">
                         <Image width={512} height={312} src={ProductData.imageSrc} alt="" className="justify-self-center m-auto"></Image>
-                        <div className="w-full mt-auto border-2 border-primary my-2 flex content-end items-end justify-end h-[100px]"></div>
+                        <div className="w-full mt-auto border-2 border-border my-2 flex content-end items-end justify-end h-[100px]"></div>
                     </div>
 
                     <div className="col-span-1 w-auto h-full flex flex-col">
@@ -81,7 +81,7 @@ export default async function productPage({ params }: {
                         </div>
                         <div className="p-2">
                             <div className="py-2 gap-2 text-sm hidden lg:flex text-nowrap">
-                                <span className="text-gray-600"> Vendido por seller e entregue por sender </span>
+                                <span className="text-gray-600 dark:text-zinc-400 "> Vendido por seller e entregue por sender </span>
                                 <b className="text-[#1f9050]">Em estoque</b>
                                 <Link href="/product" className="justify-self-end ml-auto font-semibold text-primary">
                                     Mais ofertas
@@ -92,7 +92,7 @@ export default async function productPage({ params }: {
                                 <b className="text-[#1f9050] text-base mx-1">
                                     Frete grátis
                                 </b>
-                                <span className="text-sm content-center text-gray-600"> - consulte dinsponibilidade</span>
+                                <span className="text-sm content-center text-gray-600 dark:text-zinc-400 "> - consulte dinsponibilidade</span>
                             </div>
                             <div className="py-2">
                                 <div className="flex gap-1">
@@ -111,13 +111,13 @@ export default async function productPage({ params }: {
                                     </div>
 
                                 </div>
-                                <span className="p-2 line-clamp-1 text-sm text-gray-500">A vista no PIX</span>
-                                <span className="p-2 line-clamp-1 text-sm text-gray-500">ou em até <b className="">10x de R$ {(parseInt(ProductData.price) * 1.2) / 10}</b></span>
+                                <span className="p-2 line-clamp-1 text-sm text-gray-500 dark:text-zinc-400 ">A vista no PIX</span>
+                                <span className="p-2 line-clamp-1 text-sm text-gray-500 dark:text-zinc-400 ">ou em até <b className="">10x de R$ {(parseInt(ProductData.price) * 1.2) / 10}</b></span>
                             </div>
                         </div>
                         <div className="mt-auto my-2">
                             <h1>related products</h1>
-                            <div className="h-[100px] border-2 border-primary">
+                            <div className="h-[100px] border-2 border-border">
                             </div>
                         </div>
                     </div>
