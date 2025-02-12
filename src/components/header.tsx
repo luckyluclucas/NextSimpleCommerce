@@ -75,7 +75,7 @@ export default function Header() {
                                                 {menuItem.subMenu?.map((subMenuItem) => (
                                                     <li key={subMenuItem.title} className="">
                                                         <NavigationMenuLink asChild>
-                                                            <Link href={subMenuItem.href} className="transition-all duration-200 ease-in-out text-sm hover:bg-primary hover:text-white p-2 rounded justify-start">
+                                                            <Link href={subMenuItem.href} className="transition-all duration-200 ease-in-out text-sm hover:bg-background hover:text-primary p-2 rounded justify-start">
                                                                 {subMenuItem.title}
                                                             </Link>
                                                         </NavigationMenuLink>
@@ -100,8 +100,8 @@ export default function Header() {
                     <HoverCard openDelay={40}>
 
                         <HoverCardTrigger className="flex flex-row" href="/products">
-                            <ShoppingCart color={iconColor} fill={`${numberOfProductsOnCart > 0 ? "hsl(346.8, 77.2%, 49.8%)" : "transparent"}`} size={30} className="my-1 ml-1 rotate-y-180 content-end transition-all ease-in-out duration-200" />
-                            <div className={`rounded-full w-5 h-5 text-sm flex content-center items-center justify-center m-auto text-white ${numberOfProductsOnCart > 0 ? "bg-primary" : ""} `}>
+                            <ShoppingCart color={iconColor} fill={`${numberOfProductsOnCart > 0 ? `${iconColor}` : "transparent"}`} size={30} className="my-1 ml-1 rotate-y-180 content-end transition-all ease-in-out duration-200" />
+                            <div className={`rounded-full w-5 h-5 text-sm flex content-center items-center justify-center m-auto text-white dark:text-black ${numberOfProductsOnCart > 0 ? "bg-primary" : ""} `}>
                                 {numberOfProductsOnCart === 0 ? "" : numberOfProductsOnCart}
                             </div>
                         </HoverCardTrigger>
