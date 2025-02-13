@@ -6,6 +6,7 @@ import CartContextProvider from "./contexts/CartContextProvider";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import SidebarApp from "@/components/sideBarApp";
 import { ThemeProvider } from "./contexts/themeProvider";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,16 +34,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full font-[family-name:var(--font-geist-sans)]`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={true}>
-          <CartContextProvider>
-            <SidebarProvider defaultOpen={false}>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={true}>
+            <CartContextProvider>
+              <SidebarProvider defaultOpen={false}>
 
-              <SidebarApp side="left" />
-              <Header />
-              {children}
-            </SidebarProvider>
-          </CartContextProvider>
-        </ThemeProvider>
+                <SidebarApp side="left" />
+                <Header />
+                {children}
+              </SidebarProvider>
+            </CartContextProvider>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

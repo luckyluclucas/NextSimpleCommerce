@@ -13,11 +13,12 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useSidebar } from "./ui/sidebar";
 import { menuItens } from "@/app/configs/MenuItens";
 import { useTheme } from "next-themes";
-
+import UserAvatar from "./avatar";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
 
-    const { setTheme, theme } = useTheme()
+    const { data: session } = useSession()
 
     const handleMenuOpening = () => {
 
@@ -45,6 +46,7 @@ export default function Header() {
     const numberOfProductsOnCart = cart.reduce((total, cartItem) => { return total += cartItem.quantity }, 0)
 
     const router = usePathname()
+    const { theme } = useTheme()
     const iconColor = theme === 'light' ? 'hsl(346.8, 77.2%, 49.8%)' : 'white'
 
 
@@ -53,10 +55,7 @@ export default function Header() {
         <header className={`${isHomePage && isAtTop ? 'bg-white dark:bg-black/90 border-transparent' : 'bg-white dark:bg-black/90'} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}>
             <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
                 <div className="md:flex flex-start max-w-fit hidden text-xl grow-2 list-none">
-                    <Avatar onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                        <AvatarImage src="https://github.com/shadcn.png"></AvatarImage>
-                        <AvatarFallback></AvatarFallback>
-                    </Avatar>
+                    <UserAvatar />
                     <NavigationMenu className="gap-2">
                         <NavigationMenuList>
                             {menuItens.map((menuItem) => (
