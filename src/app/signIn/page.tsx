@@ -54,7 +54,15 @@ export default function SignInPage() {
 
 
     return (
-        <div className="mt-24 bg-[var(--foreground)] w-full max-w-[380px] mx-auto px-2 justify-center items-center content-center">
+        <div className="mt-24 bg-[var(--foreground)] w-full max-w-[580px] mx-auto px-4 my-8 justify-center items-center content-center rounded">
+            <div className="flex flex-col space-y-2 text-center mb-4">
+                <h1 className="text-2xl font-semibold tracking-tight">
+                    Sign In or Create your account here
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                    Enter your username and password below to sign in
+                </p>
+            </div>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-1">
                     <FormField
@@ -63,7 +71,7 @@ export default function SignInPage() {
                         render={({ field }) => (
                             <FormItem>
                                 <div className="w-full flex flex-row gap-2 justify-between items-center">
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel className="">Username</FormLabel>
                                     <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
                                 </div>
                                 <FormControl>
@@ -78,7 +86,7 @@ export default function SignInPage() {
                         render={({ field }) => (
                             <FormItem>
                                 <div className="w-full flex flex-row gap-2 justify-between items-center">
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel className="">Password</FormLabel>
                                     <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
                                 </div>
                                 <FormControl>
@@ -88,13 +96,17 @@ export default function SignInPage() {
 
                             </FormItem>
                         )} />
-                    <Button type="submit" className="dark:bg-[var(--bakcground)] hover:text-white hover:bg-accent/70 bg-white text-black w-full dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)] border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center"> Sign In</Button>
+                    <Button type="submit" className="dark:bg-[var(--bakcground)] text-white hover:bg-accent/70 bg-primary w-full dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)] border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center"> Sign In</Button>
                 </form>
 
             </Form>
-            <Link href="/signUp">
-                <Button type="submit" className="dark:bg-[var(--bakcground)] w-full bg-white mx-auto text-black dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)]  hover:bg-white border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center mt-2"> Sign Up</Button>
-            </Link>
+            <div className="mx-auto justify-center flex">
+                <Link href="/signUp">
+                    <Button type="submit" className="dark:bg-[var(--bakcground)] w-60 bg-white mx-auto text-black dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)]  hover:bg-white border h-[40px] dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear mt-2">
+                        Create account
+                    </Button>
+                </Link>
+            </div>
             <div className="flex flex-col mt-4">
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center">
@@ -112,8 +124,8 @@ export default function SignInPage() {
                         className="mt-3 mx-auto"
                     >
 
-                        <GoogleButton disabled={false} onClick={handleProviderSignIn} type={`${theme === 'light' ? 'light' : 'dark'}`} >
-                            Sign in with {provider.name}
+                        <GoogleButton disabled={false} onClick={handleProviderSignIn} type={`${theme === 'light' ? 'light' : 'dark'}`}>
+                            1
                         </GoogleButton>
                     </form>
                 ))
