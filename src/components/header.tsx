@@ -58,9 +58,8 @@ export default function Header() {
                     <UserAvatar />
                     <NavigationMenu className="gap-2">
                         <NavigationMenuList>
-                            {menuItens.map((menuItem) => (
-
-                                <NavigationMenuItem className={`my-auto hover:scale-[1.08] hover:text-primary hover:font-extrabold rounded-full ease-in-out duration-300 select-none no-drag text-nowrap mx-2 justify-center  font-semibold transition-all`} key={menuItem.href}>
+                            {menuItens.map((menuItem) => {
+                                return <NavigationMenuItem className={`my-auto hover:scale-[1.08] hover:text-primary hover:font-extrabold rounded-full ease-in-out duration-300 select-none no-drag text-nowrap mx-2 justify-center  font-semibold transition-all`} key={menuItem.href}>
                                     <Link key={menuItem.href} className=" " href={menuItem.href}>
                                         <NavigationMenuTrigger noArrow={!menuItem.hasDropDownMenu} className={`${router === menuItem.href ? 'text-primary' : 'bg-transparent'} rounded-full`}>
 
@@ -85,7 +84,7 @@ export default function Header() {
 
                                         </NavigationMenuContent> : ''}
                                 </NavigationMenuItem>
-                            ))}
+                            })}
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>

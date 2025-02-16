@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { MoonIcon, Sun } from "lucide-react";
 import { useSession } from "next-auth/react";
-
+import { SignOut } from "@/app/SignOut/action";
 import {
     Sidebar,
     SidebarContent,
@@ -40,18 +40,19 @@ export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sid
     const sideMenuItems = [
         ...menuItens,
         {
-            title: session ? "logout" : 'sign in',
-            href: session ? "" : "/signIn",
+            title: session ? "Sign Out" : 'Sign in',
+            href: session ? "signOut" : "/signIn",
             hasDropDownMenu: false,
+            hasFunction: true,
         }
     ]
 
     return (
 
-        <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] drop-shadow-md h-[92vh] border-r border-primary dark:border-[#27272a] bg-[var(--background)] z-20"
+        <Sidebar {...props} className="top-[calc(var(--header-height)+6px)] drop-shadow-md h-[92vh] p-2 border-r border-primary dark:border-[#27272a] bg-[var(--background)] z-20"
             variant="inset"
             collapsible="offcanvas">
-            <div className="flex flex-row my-2">
+            <div className="flex flex-row my-2 px-2">
                 <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="mb-auto top-0 flex cursor-pointer">
                     {theme === "dark" ? <MoonIcon color="white" className="top-0" />
                         : <Sun color="var(--color-primary)" />}
@@ -64,12 +65,22 @@ export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sid
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu className="text-gray-300 dark:text-white">
-                            {sideMenuItems.map((item) => (
-                                <SidebarMenuItem className="" key={item.title}>
+                            {sideMenuItems.map((item) => {
+                                return (<SidebarMenuItem className="" key={item.title}>
                                     <SidebarMenuButton asChild isActive={pathname === item.href ? true : false}>
-                                        <a href={item.href} className="text-gray-800 dark:text-white font-medium">
-                                            {item.title}
-                                        </a>
+                                        {
+                                            item.title === "Sign Out" ?
+                                                (<form className="cursor-pointer w-full text-start"
+                                                    action={SignOut}
+                                                >
+                                                    <button className="cursor-pointer w-full text-start" type="submit">Sign Out</button>
+                                                </form>)
+                                                :
+                                                <a href={item.href} className="text-gray-800 dark:text-white font-medium">
+                                                    {item.title}
+                                                </a>
+                                        }
+
                                     </SidebarMenuButton>
                                     {item.subMenu?.length ? (
                                         <SidebarMenuSub>
@@ -86,7 +97,8 @@ export default function SidebarApp({ ...props }: React.ComponentProps<typeof Sid
                                         </SidebarMenuSub>
                                     ) : null}
                                 </SidebarMenuItem>
-                            ))}
+                                )
+                            })}
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>

@@ -5,5 +5,5 @@ export type MenuItens = {
     subMenu?: {
         title: string, href: string
     }[];
-
+    hasFunction?: boolean;
 }

@@ -23,5 +23,5 @@ export const menuItens: MenuItens[] = [
             { title: "WhatsApp", href: "" },
             { title: "Send an Email", href: "" },
         ]
-    }
+    },
 ];

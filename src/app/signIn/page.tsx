@@ -9,13 +9,15 @@ import handleSignIn from "./action"
 import { providerMap } from "@/auth"
 import { handleProviderSignIn } from "./action"
 import { useSession } from "next-auth/react"
+import GoogleButton from 'react-google-button'
+import { useTheme } from "next-themes"
+import Link from "next/link";
+import { Separator } from "@radix-ui/react-separator"
 
 const formSchema = z.object({
-    username: z.string().min(6).max(40),
-    email: z.string().email({ message: "Invalid email address" }),
-    password: z.string().min(12),
-    confirm: z.string().min(12),
-}).refine((data) => data.password === data.confirm, { message: "password does not match" })
+    username: z.string().min(6).max(40), password: z.string().min(12),
+
+})
 
 
 const onSubmit = (values: z.infer<typeof formSchema>) => {
@@ -28,6 +30,8 @@ const onSubmit = (values: z.infer<typeof formSchema>) => {
 export default function SignInPage() {
 
     const { data: session } = useSession()
+
+    const { theme } = useTheme()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -50,9 +54,9 @@ export default function SignInPage() {
 
 
     return (
-        <div className="mt-24 bg-[var(--foreground)] w-full max-w-[280px] mx-auto px-2 justify-center items-center content-center">
+        <div className="mt-24 bg-[var(--foreground)] w-full max-w-[380px] mx-auto px-2 justify-center items-center content-center">
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-1">
                     <FormField
                         control={form.control}
                         name="username"
@@ -70,22 +74,6 @@ export default function SignInPage() {
                         )} />
                     <FormField
                         control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="w-full flex flex-row gap-2 justify-between items-center">
-                                    <FormLabel>Email</FormLabel>
-                                    <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
-                                </div>
-                                <FormControl>
-                                    <Input placeholder="Email" {...field} />
-                                </FormControl>
-                                <FormDescription></FormDescription>
-
-                            </FormItem>
-                        )} />
-                    <FormField
-                        control={form.control}
                         name="password"
                         render={({ field }) => (
                             <FormItem>
@@ -94,26 +82,43 @@ export default function SignInPage() {
                                     <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
                                 </div>
                                 <FormControl>
-                                    <Input placeholder="Password" {...field} />
+                                    <Input className="" placeholder="Password" {...field} />
                                 </FormControl>
                                 <FormDescription></FormDescription>
 
                             </FormItem>
                         )} />
-                    <Button type="submit" className="dark:bg-[var(--foreground)] justify-start w-60 dark:border-border dark:hover:bg-primary dark:border-2 rounded dark:hover:text-black transition-colors duration-200 ease-linear dark:text-whit"> Sign In with email and password</Button>
+                    <Button type="submit" className="dark:bg-[var(--bakcground)] hover:text-white hover:bg-accent/70 bg-white text-black w-full dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)] border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center"> Sign In</Button>
                 </form>
+
             </Form>
-            {Object.values(providerMap).map((provider) => (
-                <form key={provider.id}
-                    action={handleProviderSignIn}
-                    className="mt-4"
-                >
-                    <Button type="submit" className="dark:bg-[var(--foreground)] justify-start w-60 dark:hover:bg-primary dark:border-border dark:border-2 rounded dark:hover:text-black transition-colors duration-200 ease-linear dark:text-white">
-                        Sign in with {provider.name}
-                    </Button>
-                </form>
-            ))
-            }
+            <Link href="/signUp">
+                <Button type="submit" className="dark:bg-[var(--bakcground)] w-full bg-white mx-auto text-black dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)]  hover:bg-white border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center mt-2"> Sign Up</Button>
+            </Link>
+            <div className="flex flex-col mt-4">
+                <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                        <span className="w-full border-t" />
+                    </div>
+                    <div className="relative flex justify-center text-xs uppercase">
+                        <span className="bg-background px-2 text-muted-foreground">
+                            Or continue with
+                        </span>
+                    </div>
+                </div>
+                {Object.values(providerMap).map((provider) => (
+                    <form key={provider.id}
+                        action={handleProviderSignIn}
+                        className="mt-3 mx-auto"
+                    >
+
+                        <GoogleButton disabled={false} onClick={handleProviderSignIn} type={`${theme === 'light' ? 'light' : 'dark'}`} >
+                            Sign in with {provider.name}
+                        </GoogleButton>
+                    </form>
+                ))
+                }
+            </div>
         </div >
     )
 }
