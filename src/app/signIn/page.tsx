@@ -57,7 +57,7 @@ export default function SignInPage() {
         <div className="mt-24 bg-[var(--foreground)] w-full max-w-[580px] mx-auto px-4 my-8 justify-center items-center content-center rounded">
             <div className="flex flex-col space-y-2 text-center mb-4">
                 <h1 className="text-2xl font-semibold tracking-tight">
-                    Sign In or Create your account here
+                    Sign In or Create your Account
                 </h1>
                 <p className="text-sm text-muted-foreground">
                     Enter your username and password below to sign in
