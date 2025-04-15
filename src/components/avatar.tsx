@@ -8,7 +8,11 @@ import {
 } from "@/components/ui/hover-card";
 
 export default function UserAvatar() {
-  const { data: session } = useSession();
+  const { data: session, status} = useSession();
+
+  if(status == "loading"){
+    return null;
+  }
 
   if (session) {
     return (
