@@ -3,8 +3,8 @@ import { signIn } from "@/auth"
 import { redirect } from "next/navigation"
 import { AuthError } from "next-auth"
 
-export default async function handleSignIn(formData: { email: string, password: string }) {
-  console.log(formData)
+export default async function handleSignIn(formData: { username: string, password: string }) {
+
   try {
     await signIn("credentials", formData)
   } catch (error) {
