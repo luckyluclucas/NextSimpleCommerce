@@ -1,17 +1,36 @@
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+import Link from "next/link"
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from "@/components/ui/hover-card"
+// import { useState, useEffect } from "react"
 
 export default function UserAvatar() {
-  const { data: session, status} = useSession();
+  const { data: session, status} = useSession()
+  // const [ imageSrc, setImageSrc ] = useState('');
 
-  if(status == "loading"){
-    return null;
+  //         useEffect(() => {
+  // 
+  //   if (session?.user?.image)  {fetch(session.user.image).then(response => { if (!response.ok){if (response.status === 429) {
+  //                        }    else {
+  //                        }
+  //         } else {
+  //                    }
+  //       })
+  //       .catch(error => {
+  //         console.error("Erro ao buscar avatar:", error);
+
+  //       })
+  //   } else {
+  //     
+  //   }
+  // }, [session?.user?.image])
+
+  if(status === 'loading'){
+    return null
   }
 
   if (session) {

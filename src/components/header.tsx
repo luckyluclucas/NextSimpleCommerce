@@ -1,10 +1,9 @@
 "use client";
 import Link from "next/link";
 import SearchBar from "@/components/comp-27";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { NavigationMenu, NavigationMenuList, NavigationMenuLink, NavigationMenuContent, NavigationMenuItem, NavigationMenuTrigger } from "./ui/navigation-menu";
 import useCart from "@/hooks/useCart";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
@@ -14,11 +13,11 @@ import { useSidebar } from "./ui/sidebar";
 import { menuItens } from "@/app/configs/MenuItens";
 import { useTheme } from "next-themes";
 import UserAvatar from "./avatar";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
 export default function Header() {
 
-    const { data: session } = useSession()
+//    const { data: session } = useSession()
 
     const handleMenuOpening = () => {
 

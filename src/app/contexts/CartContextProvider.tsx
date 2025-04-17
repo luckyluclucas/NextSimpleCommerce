@@ -27,13 +27,13 @@ export default function CartContextProvider({ children }: {
     }
 
     const removeFromCart = (id: number) => {
-        setCart((prevCart) => prevCart.filter((product) => product.id !== id))
+        setCart((prevCart) => prevCart.filter((product) => product.productId !== id))
     }
 
     const decreaseFromCart = (id: number) => {
         setCart((prevCart) => {
             return prevCart.map(item =>
-                item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+                item.productId === id ? { ...item, quantity: item.quantity - 1 } : item
             ).filter((p) => p.quantity > 0)
         })
     }

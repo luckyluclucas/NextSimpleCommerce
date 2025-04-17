@@ -19,7 +19,7 @@ const getProductTitle = async (id: number) => {
     }
 }
 
-export default async function updateURLwithTitle({ params }: { params: { id: number } }) {
+export default async function updateURLwithTitle({ params }: { params: Promise<{ id: number }> }) {
 
     const { id } = await params
     const p: product = await getProductTitle(id)
