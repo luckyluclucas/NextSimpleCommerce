@@ -2,7 +2,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ProductCard from "@/components/cardProduct";
 import slugify from "slugify";
 import "../globals.css";
-import { getProductData } from "@/database/getProductData";
+import { getProductData } from "@/app/database/getProductData";
 
 export default function ProductsPage() {
   const products = getProductData();
