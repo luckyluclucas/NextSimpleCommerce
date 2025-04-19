@@ -5,10 +5,13 @@ import { AuthError } from "next-auth"
 
 const SIGNIN_ERROR_URL = process.env.URL
 
-export default async function handleSignIn(formData: { username: string, password: string }) {
+export default async function handleSignIn(formData: FormData) {
+
+    const username = formData.get("username") as string;
+  const password = formData.get("password") as string;
 
   try {
-    await signIn("credentials", formData)
+    await signIn("credentials", {username, password})
   } catch (error) {
     if (error instanceof AuthError) {
       return redirect(`${SIGNIN_ERROR_URL}?error=${error.type}`)
