@@ -26,9 +26,6 @@ const formSchema = z.object({
   password: z.string().min(12),
 });
 
-const onSubmit = (values: z.infer<typeof formSchema>) => {
-  handleSignIn(values);
-};
 
 export default function SignInPage() {
   const { data: session } = useSession();
@@ -72,7 +69,7 @@ if (status === "loading") {
       </div>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          action={handleSignIn}
           className="flex flex-col gap-1"
         >
           <FormField
