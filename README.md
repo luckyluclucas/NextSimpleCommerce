@@ -18,9 +18,8 @@ Clone the Repository with:
     cd NextSimpleCommerce
 
 Install Dependencies:
-Bash
 
-pnpm install
+    pnpm install
 
 Configure Environment Variables:
 
