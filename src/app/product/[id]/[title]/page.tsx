@@ -40,7 +40,7 @@ export default async function productPage({
     id: 0,
     title: "Produto não encontrado",
     description: "Este produto não está disponível.",
-    imageSrc: "/placeholder.jpg",
+    image: "/placeholder.jpg",
     price: "0",
   };
 
@@ -63,7 +63,7 @@ export default async function productPage({
             <Image
               width={512}
               height={312}
-              src={ProductData.imageSrc}
+              src={ProductData.image}
               alt=""
               className="justify-self-center m-auto"
             ></Image>

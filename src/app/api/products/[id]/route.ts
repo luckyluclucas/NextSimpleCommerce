@@ -1,5 +1,7 @@
+"use server"
 import { NextRequest, NextResponse } from "next/server";
-import { getProductData } from "@/app/database/getProductData";
+import { getProductData } from "@/app/database/db";
+import { product } from "@/app/types/product";
 
 export async function GET(
   request: NextRequest,
@@ -19,7 +21,7 @@ export async function GET(
   if (isNaN(productId)) {
     NextResponse.json({ error: "id inválido" }, { status: 400 });
   }
-  const products = getProductData();
+  const products: product[] = await getProductData();
   const productData = products.find((p) => p.id == id);
 
   if (!productData) {

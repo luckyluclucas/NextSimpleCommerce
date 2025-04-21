@@ -2,10 +2,11 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ProductCard from "@/components/cardProduct";
 import slugify from "slugify";
 import "../globals.css";
-import { getProductData } from "@/app/database/getProductData";
+import { getProductData } from "@/app/database/db";
+import { product } from "../types/product";
 
-export default function ProductsPage() {
-  const products = getProductData();
+export default async function ProductsPage() {
+  const products: product[] = await getProductData();
 
   return (
     <div className="p-0 mx-auto font-[family-name:var(--font-geist-sans)]">

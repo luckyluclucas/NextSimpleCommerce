@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { product } from "./types/product";
 import CarouselWithProduct from "@/components/CarouselWithProducts";
-import { getProductData } from "@/app/database/getProductData";
+import { getProductData } from "@/app/database/db";
 
 export const revalidate = 60;
 
