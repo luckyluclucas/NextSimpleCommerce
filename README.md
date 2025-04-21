@@ -57,7 +57,7 @@ Once the database container is running and the DATABASE_URL is set in your .env 
     # Ensure DATABASE_URL is set in your environment or .env file, then run:
     pnpm migrate up
     # OR, if running directly and overriding .env:
-    # DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME" pnpm migrate up
+    DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME" pnpm migrate up
 
 Seed Database (Optional):
 
@@ -66,11 +66,10 @@ To populate the database with fake product data for development or testing, use 
     # Ensure DATABASE_URL is set, then run:
     node src/app/database/tools/seedTheDatabaseWithFakeProducts.js
     # OR, if running directly:
-    # DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME" node src/app/database/tools/seedTheDatabaseWithFakeProducts.js
+    DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME" node src/app/database/tools/seedTheDatabaseWithFakeProducts.js
 
 Run the Development Server:
 
-    After completing the setup steps (Docker container, environment variables, migrations, optional seeding), you can start the Next.js development server:
-    Bash
-
-pnpm dev
+After completing the setup steps (Docker container, environment variables, migrations, optional seeding), you can start the Next.js development server:
+    
+    pnpm dev
