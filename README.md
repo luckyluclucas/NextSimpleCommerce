@@ -35,7 +35,6 @@ Set a secret using Auth.js/NextAuth.js CLI:
 By default Auth.js will set the output on an .env.local with the AUTH_SECRET there, just copy the content to the .env file
 
 After that add your Google application credentials to the .env file:
-Snippet de código
 
     AUTH_GOOGLE_ID="YOUR_GOOGLE_CLIENT_ID"
     AUTH_GOOGLE_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
