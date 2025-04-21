@@ -27,10 +27,12 @@ Create a .env file in the project root directory by copying the example file:
     
     mv .example.env .env
 
-# Using Auth.js/NextAuth.js CLI:
-pnpx auth secret
 
-Set the output as the AUTH_SECRET variable in your .env file.
+Using Auth.js/NextAuth.js CLI:
+
+    pnpx auth secret
+
+By default Auth.js will set the outpu on an .env.local with the AUTH_SECRET there, just copy the content to the .env file
 Add your Google application credentials to the .env file:
 Snippet de código
 
