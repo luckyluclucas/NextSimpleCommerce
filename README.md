@@ -23,7 +23,7 @@ Install Dependencies:
 
 Configure Environment Variables:
 
-Create a .env file in the project root directory by copying the example file (if one exists, e.g., .env.example):
+Create a .env file in the project root directory by copying the example file:
     
     mv .example.env .env
 
