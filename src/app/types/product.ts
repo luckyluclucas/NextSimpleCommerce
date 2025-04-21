@@ -1,6 +1,6 @@
 export interface product {
 
-    imageSrc: string,
+    image: string,
     id: number,
     title: string,
     description: string,

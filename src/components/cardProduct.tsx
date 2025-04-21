@@ -25,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
         <CardContent className="m-0">
           <Image
             className="sm:w-full h-full p-2 object-cover rounded-lg aspect-square"
-            src={product.imageSrc}
+            src={product.image}
             width={1280}
             height={2080}
             alt="image"

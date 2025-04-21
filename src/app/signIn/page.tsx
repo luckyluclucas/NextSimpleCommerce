@@ -14,7 +14,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import handleSignIn from "./action";
-import { providerMap } from "@/auth";
 import { handleProviderSignIn } from "./action";
 import { useSession } from "next-auth/react";
 import GoogleButton from "react-google-button";
@@ -29,6 +28,8 @@ const formSchema = z.object({
 
 export default function SignInPage() {
   const { data: session } = useSession();
+
+  const providerMap = [ { id: 'google', name: 'Google' } ] 
 
   const { theme } = useTheme();
 
