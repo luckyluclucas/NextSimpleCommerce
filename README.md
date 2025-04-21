@@ -52,8 +52,7 @@ Set Up a Database Container using docker
 
 Run Database Migrations:
 
-    Once the database container is running and the DATABASE_URL is set in your .env file, run the initial database migration to create all necessary tables. The command requires the DATABASE_URL to be accessible:
-    Bash
+Once the database container is running and the DATABASE_URL is set in your .env file, run the initial database migration to create all necessary tables. The command requires the DATABASE_URL to be accessible:
 
     # Ensure DATABASE_URL is set in your environment or .env file, then run:
     pnpm migrate up
@@ -62,8 +61,7 @@ Run Database Migrations:
 
 Seed Database (Optional):
 
-    To populate the database with fake product data for development or testing, use the provided seeding script:
-    Bash
+To populate the database with fake product data for development or testing, use the provided seeding script:
 
     # Ensure DATABASE_URL is set, then run:
     node src/app/database/tools/seedTheDatabaseWithFakeProducts.js
