@@ -1,13 +1,85 @@
-A simple boilerplate to ecommerce platafforms created with the next.js framework, it's still at the embryonic stage. 
-It's still in early development and lack a lot of features.
-- If you want to run it you'll need node, pnpm and docker installed
-- to properly run it and get auth working you will need to run pnpx auth secret and set the variables AUTH_GOOGLE_ID and AUTH_GOOGLE_SECRET with you personal client id and secret
-- you probably still able to run it without these variables, but you will get some errors and the auth with google will not work
-- after setting the environment variables in .env file go to the project dir
-- independently if you run pnpm dev or pnpm build you need to set docker postgres db
-- after seting it uses the env DATABASE_URL= to run the first migration, it'll set all database tables needed
-- the command will look something like it:
-- DATABASE_URL=postgres://yourdbuser:yourdbuserpassword@localhost:5432/databasename pnpm migrate up
-- if you and some fake products data you can use the fake product generator tools with
-- DATABASE_URL=postgres://yourdbuser:yourdbuserpassword@localhost:5432/databasename node src/app/database/tools/seedTheDatabaseWithFakeProducts.js
-- after seeting the database docker container, the envs for google auth and db connections and running the migration and seeding tool you can simply run pnpm dev to run the dev server
+Okay, here's a revised version of your text, focusing on fixing grammatical errors, improving fluency, and using more standard technical documentation phrasing.
+
+Project Description
+
+This is a simple boilerplate for e-commerce platforms, built using the Next.js framework. Please note that it is currently in the early stages of development and lacks many features.
+
+Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+    Node.js
+    pnpm
+    Docker
+
+Setup Instructions
+
+    Clone the Repository: (You might want to add this step explicitly)
+    Bash
+
+git clone <your-repository-url>
+cd <repository-directory>
+
+Install Dependencies:
+Bash
+
+pnpm install
+
+Configure Environment Variables:
+
+    Create a .env file in the project root directory by copying the example file (if one exists, e.g., .env.example).
+    Authentication Secrets:
+        Generate a secret key for authentication. You can use the default Auth.js CLI tool:
+        Bash
+
+# Example using Auth.js/NextAuth.js CLI:
+pnpx auth secret
+
+Set the output as the AUTH_SECRET variable in your .env file.
+Add your Google application credentials to the .env file:
+Snippet de código
+
+    AUTH_GOOGLE_ID="YOUR_GOOGLE_CLIENT_ID"
+    AUTH_GOOGLE_SECRET="YOUR_GOOGLE_CLIENT_SECRET"
+    AUTH_SECRET="YOUR_GENERATED_AUTH_SECRET"
+
+    Note: While you might be able to run the application without the AUTH_GOOGLE_ID and AUTH_GOOGLE_SECRET variables, you may encounter errors, and Google authentication will not function.
+
+Database Connection:
+
+    Set the DATABASE_URL variable in your .env file, pointing to your PostgreSQL database (see step 5 for an example).
+
+Snippet de código
+
+    DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME"
+
+Set Up Database Container:
+
+    You need a running PostgreSQL database instance. Instructions for setting one up using Docker will be added soon, but for now any tutorial of setting and connection a pg docker container will work.
+
+Run Database Migrations:
+
+    Once the database container is running and the DATABASE_URL is set in your .env file, run the initial database migration to create all necessary tables. The command requires the DATABASE_URL to be accessible:
+    Bash
+
+    # Ensure DATABASE_URL is set in your environment or .env file, then run:
+    pnpm migrate up
+    # OR, if running directly and overriding .env:
+    # DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME" pnpm migrate up
+
+Seed Database (Optional):
+
+    To populate the database with fake product data for development or testing, use the provided seeding script:
+    Bash
+
+    # Ensure DATABASE_URL is set, then run:
+    node src/app/database/tools/seedTheDatabaseWithFakeProducts.js
+    # OR, if running directly:
+    # DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME" node src/app/database/tools/seedTheDatabaseWithFakeProducts.js
+
+Run the Development Server:
+
+    After completing the setup steps (Docker container, environment variables, migrations, optional seeding), you can start the Next.js development server:
+    Bash
+
+pnpm dev
