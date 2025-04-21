@@ -1,5 +1,3 @@
-Okay, here's a revised version of your text, focusing on fixing grammatical errors, improving fluency, and using more standard technical documentation phrasing.
-
 Project Description
 
 This is a simple boilerplate for e-commerce platforms, built using the Next.js framework. Please note that it is currently in the early stages of development and lacks many features.
