@@ -28,7 +28,7 @@ Create a .env file in the project root directory by copying the example file:
     mv .example.env .env
 
 
-Set a secret using Auth.js/NextAuth.js CLI:
+# Set a secret using Auth.js/NextAuth.js CLI:
 
     pnpx auth secret
 
@@ -42,17 +42,13 @@ After that add your Google application credentials to the .env file:
 
     Note: While you might be able to run the application without the AUTH_GOOGLE_ID and AUTH_GOOGLE_SECRET variables, you may encounter errors, and Google authentication will not function.
 
-Database Connection:
+# Database Connection:
 
-    Set the DATABASE_URL variable in your .env file, pointing to your PostgreSQL database (see step 5 for an example).
-
-Snippet de código
+You need to set the DATABASE_URL variable in your .env file, pointing to your PostgreSQL database (see bellow as an example, change the user pass and name to the ones you set).
 
     DATABASE_URL="postgres://YOUR_DB_USER:YOUR_DB_PASSWORD@localhost:5432/YOUR_DB_NAME"
 
-Set Up Database Container:
-
-    You need a running PostgreSQL database instance. Instructions for setting one up using Docker will be added soon, but for now any tutorial of setting and connection a pg docker container will work.
+Set Up a Database Container using docker
 
 Run Database Migrations:
 
