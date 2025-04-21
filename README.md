@@ -12,7 +12,7 @@ Before you begin, ensure you have the following installed:
 
 Setup Instructions
 
-    Clone the Repository: (You might want to add this step explicitly)
+    Clone the Repository with: 
     Bash
 
 git clone <your-repository-url>
