@@ -10,7 +10,7 @@ Before you begin, ensure you have the following installed:
     pnpm
     Docker
 
-Setup Instructions
+# Setup Instructions
 
 Clone the Repository with: 
     
@@ -23,12 +23,11 @@ Install Dependencies:
 
 Configure Environment Variables:
 
-    Create a .env file in the project root directory by copying the example file (if one exists, e.g., .env.example).
-    Authentication Secrets:
-        Generate a secret key for authentication. You can use the default Auth.js CLI tool:
-        Bash
+Create a .env file in the project root directory by copying the example file (if one exists, e.g., .env.example):
+    
+    mv .example.env .env
 
-# Example using Auth.js/NextAuth.js CLI:
+# Using Auth.js/NextAuth.js CLI:
 pnpx auth secret
 
 Set the output as the AUTH_SECRET variable in your .env file.
