@@ -12,11 +12,10 @@ Before you begin, ensure you have the following installed:
 
 Setup Instructions
 
-    Clone the Repository with: 
-    Bash
-
-git clone <your-repository-url>
-cd <repository-directory>
+Clone the Repository with: 
+    
+    git clone https://github.com/luckyluclucas/NextSimpleCommerce/
+    cd NextSimpleCommerce
 
 Install Dependencies:
 Bash
