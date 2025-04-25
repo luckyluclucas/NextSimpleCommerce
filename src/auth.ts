@@ -1,17 +1,25 @@
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import type { Provider } from "next-auth/providers";
-import PostgresAdapter from "@auth/pg-adapter"
+import PostgresAdapter from "@auth/pg-adapter";
 import pool from "./app/database/pool";
 import { getProductData } from "./app/database/db";
-
-getProductData()
+import Credentials from "next-auth/providers/credentials";
+getProductData();
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PostgresAdapter(pool),
-  session: {strategy: "jwt"},
-  providers: [Google],
+  session: { strategy: "jwt" },
+  providers: [
+    Google,
+    Credentials({
+      credentials: {
+        username: { label: "username" },
+        password: { label: "password", type: "password" },
+      },
+    }),
+  ],
 
   pages: {
     signIn: "/signIn",
@@ -31,4 +39,3 @@ export const providerMap = providers
     }
   })
   .filter((provider) => provider.id !== "credentials");
-console.log(providerMap)

@@ -29,7 +29,7 @@ async function GetProductData<product>(
 export default async function productPage({
   params,
 }: {
-  params: Promise<{ id: number; title: string }>
+  params: Promise<{ id: number; title: string }>;
 }) {
   const { id } = await params;
 
