@@ -22,7 +22,8 @@ import { useActionState, useRef } from "react";
 import HandleSignUp from "./action";
 import { startTransition } from "react";
 import { formSchema } from "./formSchema";
-import { UndoDot } from "lucide-react";
+import { UndoDot, ArrowRight } from "lucide-react";
+import { useEffect } from "react";
 
 export default function SignUp() {
   const { data: session } = useSession();
@@ -42,6 +43,22 @@ export default function SignUp() {
     HandleSignUp,
     { message: "" },
   );
+
+  useEffect(() => {
+    if (state.message) {
+      Object.entries(state.message).forEach(([field, message]) => {
+        form.setError(field as keyof z.infer<typeof formSchema>, { message });
+      });
+    }
+    if (state.success) {
+      router.push("/signIn");
+    }
+
+    if (!state.success && state.error) {
+      form.setError("username", { type: "server", message: state.message });
+      console.log(state.message);
+    }
+  }, [state, form]);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -70,7 +87,6 @@ export default function SignUp() {
         <Form {...form}>
           <form
             ref={formRef}
-            // onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col gap-1"
             action={handleSignUpFormAction}
           >
@@ -131,10 +147,9 @@ export default function SignUp() {
             <Button
               type="button"
               onClick={onSubmit}
-              className="dark:bg-[var(--bakcground)] text-white hover:bg-accent/70 bg-primary w-full dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)] border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center"
+              className="w-full sm:w-100 mx-auto dark:bg-[var(--bakcground)] text-white hover:bg-accent/70 bg-primary dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)] border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center"
             >
-              {" "}
-              Create Account
+              <ArrowRight className="mr-4" /> Create Account
             </Button>
           </form>
         </Form>
@@ -155,9 +170,9 @@ export default function SignUp() {
             <Button
               onClick={() => router.push("/signIn")}
               type="submit"
-              className="dark:bg-[var(--bakcground)] w-60 bg-white mx-auto text-black dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)]  hover:bg-white border h-[40px] dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear mt-2"
+              className="dark:text-black w-60 bg-white mx-auto text-black hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)]  hover:bg-white border h-[40px] dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear mt-2"
             >
-              <UndoDot className="mr-2"></UndoDot>
+              <UndoDot className="mr-6"></UndoDot>
               Sign In
             </Button>
           </Link>
