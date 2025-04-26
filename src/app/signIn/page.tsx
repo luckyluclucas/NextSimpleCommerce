@@ -19,15 +19,22 @@ import { useSession } from "next-auth/react";
 import GoogleButton from "react-google-button";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { useRef } from "react";
 
 const formSchema = z.object({
-  username: z.string().min(6).max(40),
-  password: z.string().min(12),
+  username: z
+    .string()
+    .min(6, "at least 6 chars dude")
+    .max(40, "it's a password, not a wikipedia text"),
+  password: z
+    .string()
+    .min(12, "dawg ya password should have at least 12 chars"),
 });
 
 export default function SignInPage() {
   const { data: session } = useSession();
 
+  const formRef = useRef<HTMLFormElement>(null);
   const providerMap = [{ id: "google", name: "Google" }];
 
   const { theme } = useTheme();
@@ -44,6 +51,10 @@ export default function SignInPage() {
   if (status === "loading") {
     return null; // ou loading spinner
   }
+
+  const onSubmit = () => {
+    formRef.current?.requestSubmit();
+  };
 
   if (session) {
     return (
@@ -68,7 +79,11 @@ export default function SignInPage() {
           </p>
         </div>
         <Form {...form}>
-          <form action={handleSignIn} className="flex flex-col gap-1">
+          <form
+            ref={formRef}
+            action={handleSignIn}
+            className="flex flex-col gap-1"
+          >
             <FormField
               control={form.control}
               name="username"
@@ -95,15 +110,20 @@ export default function SignInPage() {
                     <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
                   </div>
                   <FormControl>
-                    <Input className="" placeholder="Password" {...field} />
+                    <Input
+                      className=""
+                      placeholder="Password"
+                      type="password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription></FormDescription>
                 </FormItem>
               )}
             />
             <Button
-              type="submit"
-              className="dark:bg-[var(--bakcground)] text-white hover:bg-accent/70 bg-primary w-full dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)] border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center"
+              className="mx-auto w-full sm:w-100 dark:bg-[var(--bakcground)] text-white hover:bg-accent/70 bg-primary dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)] border h-[40px] justify-start dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear justify-center"
+              onClick={form.handleSubmit(onSubmit)}
             >
               {" "}
               Sign In
@@ -112,10 +132,7 @@ export default function SignInPage() {
         </Form>
         <div className="mx-auto justify-center flex">
           <Link href="/signUp">
-            <Button
-              type="submit"
-              className="dark:bg-[var(--bakcground)] w-60 bg-white mx-auto text-black dark:text-white hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)]  hover:bg-white border h-[40px] dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear mt-2"
-            >
+            <Button className="w-60 bg-white/60 mx-auto text-black dark:text-black hover:shadow-[0_0_3px_3px_rgba(225,29,72,0.45)] dark:hover:shadow-[0_0_3px_3px_rgba(255,255,255,0.45)]  hover:bg-white border h-[40px] dark:border-border dark:hover:bg-none dark:border-2 rounded transition-all duration-200 ease-linear mt-2">
               Create account
             </Button>
           </Link>

@@ -3,7 +3,7 @@ import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
 
-const SIGNIN_ERROR_URL = process.env.URL;
+const SIGNIN_ERROR_URL = process.env.URL + "/signIn";
 
 export default async function handleSignIn(formData: FormData) {
   const username = formData.get("username") as string;
