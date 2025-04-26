@@ -12,8 +12,8 @@ exports.shorthands = undefined;
 exports.up = (pgm) => {
   pgm.createTable("users", {
     id: "id",
-    name: { type: "varchar(255)", notNull: true },
-    email: { type: "varchar(255)", notNull: true },
+    name: { type: "varchar(255)", unique: true, notNull: true },
+    email: { type: "varchar(255)", unique: true, notNull: true },
     emailVerified: { type: "timestamp" },
     image: { type: "TEXT" },
     created_at: {
@@ -66,4 +66,4 @@ exports.up = (pgm) => {
  * @param run {() => void | undefined}
  * @returns {Promise<void> | void}
  */
-exports.down = (pgm) => {};
+exports.down = (pgm) => { };
