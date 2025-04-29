@@ -29,7 +29,7 @@ async function GetProductData<product>(
 export default async function productPage({
   params,
 }: {
-  params: Promise<{ id: number; title: string }>
+  params: Promise<{ id: number; title: string }>;
 }) {
   const { id } = await params;
 
@@ -40,7 +40,7 @@ export default async function productPage({
     id: 0,
     title: "Produto não encontrado",
     description: "Este produto não está disponível.",
-    image: "/placeholder.jpg",
+    image: "",
     price: "0",
   };
 

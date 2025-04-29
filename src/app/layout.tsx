@@ -23,7 +23,6 @@ export const metadata: Metadata = {
   description: "Shop here, not there, cause here is better than there",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,10 +34,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden w-full font-[family-name:var(--font-geist-sans)]`}
       >
         <SessionProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={true}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange={true}
+          >
             <CartContextProvider>
               <SidebarProvider defaultOpen={false}>
-
                 <SidebarApp side="left" />
                 <Header />
                 {children}

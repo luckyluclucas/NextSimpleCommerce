@@ -16,18 +16,15 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
   const { addToCart, cart } = useCart();
 
-  useEffect(() => {
-  }, [cart]);
-
   return (
-    <Card className="aspec-[3/4] mb-12 hover:scale-101 bg-[var(--background)] flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
+    <Card className="h-content aspec-[3/4] mb-6 hover:scale-101 bg-[var(--background)] flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
       <Link href={productLink}>
         <CardContent className="m-0">
           <Image
             className="sm:w-full h-full p-2 object-cover rounded-lg aspect-square"
             src={product.image}
-            width={1280}
-            height={2080}
+            width={512}
+            height={512}
             alt="image"
           />
         </CardContent>
@@ -56,7 +53,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
           onClick={() => {
             addToCart(product);
           }}
-          className="cursor-pointer w-full h-full bg-primary hover:bg-primary/70 dark:text-black dark:hover:text-accent"
+          className="cursor-pointer w-full  bg-primary hover:bg-primary/70 dark:text-black dark:hover:text-accent"
         >
           <ShoppingCart />
           Comprar
