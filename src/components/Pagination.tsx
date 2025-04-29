@@ -64,9 +64,8 @@ export default function ProductsPagination({
         </PaginationItem>
 
         {navigationPages.map((p) => (
-          <PaginationItem>
+          <PaginationItem key={p}>
             <PaginationLink
-              key={p}
               isActive={p === currentPage}
               onClick={() => setCurrentPage(parseInt(p))}
               className="dark:!text-white !text-black !text-lg"
