@@ -6,7 +6,7 @@ import { getProductData } from "@/app/database/db";
 export const revalidate = 60;
 
 export default async function Home() {
-  const data: product[] = await getProductData();
+  const data: product[] = await getProductData(0, 20);
 
   return (
     <div className="flex flex-col m-0 w-full">
