@@ -54,3 +54,4 @@ export async function seedFakeProductsOnDatabase(TotalNumberOfproducts) {
 }
 
 seedFakeProductsOnDatabase(100);
+

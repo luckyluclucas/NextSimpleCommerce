@@ -59,4 +59,5 @@ export async function getTotalNumberOfProducts() {
   } catch (error) {
     console.log("error while querying database" + error);
   }
+
 }

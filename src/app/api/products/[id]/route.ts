@@ -21,7 +21,9 @@ export async function GET(
   if (isNaN(productId)) {
     NextResponse.json({ error: "id inválido" }, { status: 400 });
   }
+
   const products: product[] = await getProductById(id);
+  
   const productData = products.find((p) => p.id == id);
 
   if (!productData) {

@@ -37,3 +37,4 @@ export const providerMap = providers
     }
   })
   .filter((provider) => provider.id !== "credentials");
+console.log(providerMap)
