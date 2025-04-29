@@ -40,7 +40,7 @@ export default async function productPage({
     id: 0,
     title: "Produto não encontrado",
     description: "Este produto não está disponível.",
-    image: "/placeholder.jpg",
+    image: "",
     price: "0",
   };
 
