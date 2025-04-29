@@ -46,6 +46,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.25.1",
+    "@faker-js/faker": "^9.7.0",
     "@tailwindcss/postcss": "^4.1.4",
     "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.17.31",
