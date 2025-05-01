@@ -39,3 +39,37 @@ export async function CreateUser(userData: {
     throw error;
   }
 }
+
+export async function AuthenticateUser(email: string, password: string) {
+  if (!email || !password) {
+    console.log(email, password);
+    throw new Error(
+      "INVALID CREDENTIALS, ONE OR TWO OF THE INPUTS ARE MISSING OR UNDEFINED",
+    );
+  }
+  try {
+    const e = email.toLowerCase().trim().toString();
+    const result = await pool.query(
+      "SELECT name, id, image, password FROM users WHERE email = $1",
+      [e],
+    );
+    let user = result.rows[0];
+    if (!user) {
+      throw new Error("user does not exists");
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+
+    if (!match) {
+      console.log("password is incorrect");
+      throw new Error("invalid credentials");
+    }
+
+    const { password: _, ...userWithoutPass } = user;
+    user = userWithoutPass;
+    return user;
+  } catch (error) {
+    console.log("error on fetching database", error);
+    return;
+  }
+}
