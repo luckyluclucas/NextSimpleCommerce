@@ -5,16 +5,30 @@ import type { Provider } from "next-auth/providers";
 import PostgresAdapter from "@auth/pg-adapter";
 import pool from "./app/database/pool";
 import Credentials from "next-auth/providers/credentials";
+import { AuthenticateUser } from "./app/database/usersMethods";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PostgresAdapter(pool),
   session: { strategy: "jwt" },
   providers: [
-    Google,
+    Google({ allowDangerousEmailAccountLinking: true }),
     Credentials({
       credentials: {
-        username: { label: "username" },
-        password: { label: "password", type: "password" },
+        username: {},
+        password: {},
+      },
+
+      authorize: async (credentials) => {
+        let user = null;
+        const email = credentials.username;
+        const password = credentials.password;
+        user = await AuthenticateUser(email as string, password as string);
+
+        if (!user) {
+          throw new Error("Invalid credentials");
+        }
+        console.log(user);
+        return user;
       },
     }),
   ],
@@ -37,4 +51,3 @@ export const providerMap = providers
     }
   })
   .filter((provider) => provider.id !== "credentials");
-console.log(providerMap)
