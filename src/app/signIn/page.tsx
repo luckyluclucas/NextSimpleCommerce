@@ -20,6 +20,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   username: z
@@ -32,15 +33,11 @@ const formSchema = z.object({
 });
 
 export default function SignInPage() {
+  const formRef = useRef<HTMLFormElement>(null);
   const { data: session, update, status } = useSession();
-
   const router = useRouter();
 
-  const formRef = useRef<HTMLFormElement>(null);
-  const providerMap = [{ id: "google", name: "Google" }];
-
   const { theme } = useTheme();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,18 +45,20 @@ export default function SignInPage() {
       password: "",
     },
   });
-  if (status === "loading") {
-    return null; // ou loading spinner
+  useEffect(() => {
+    if (status === "authenticated") {
+      return router.replace("/");
+    }
+  });
+  if (status === "loading" || session) {
+    return null;
   }
+
+  const providerMap = [{ id: "google", name: "Google" }];
 
   const onSubmit = async (formData: FormData) => {
     await signIn("credentials", formData);
   };
-
-  if (session) {
-    return router.push("/");
-  }
-
   return (
     <div className="mt-24 bg-[var(--foreground)] w-full max-w-[580px] mx-auto px-4 my-8 justify-center items-center content-center rounded">
       <div className="flex flex-col space-y-2 text-center mb-4">

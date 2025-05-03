@@ -6,16 +6,16 @@ import { AuthError } from "next-auth";
 const SIGNIN_ERROR_URL = process.env.URL + "/signIn";
 
 export default async function handleSignIn(formData: FormData) {
-
-  const username = formData.get("username") as string;
+  const email = formData.get("username") as string;
   const password = formData.get("password") as string;
+  formData.append("redirectTo", "/");
 
   try {
-    await signIn("credentials", { username, password });
-
+    await signIn("credentials", formData);
+    return { message: "success" };
   } catch (error) {
     if (error instanceof AuthError) {
-      return redirect(`${SIGNIN_ERROR_URL}?error=${error.type}`);
+      return redirect(`${SIGNIN_ERROR_URL}?error=${error}`);
     }
     throw error;
   }
@@ -31,7 +31,7 @@ export async function handleProviderSignIn() {
     // not existing, or the user not having the correct role.
     // In some cases, you may want to redirect to a custom error
     if (error instanceof AuthError) {
-      return redirect(`${SIGNIN_ERROR_URL}?error=${error.type}`);
+      return redirect(`${SIGNIN_ERROR_URL}?error=${error}`);
     }
 
     // Otherwise if a redirects happens Next.js can handle it

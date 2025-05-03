@@ -73,3 +73,23 @@ export async function AuthenticateUser(email: string, password: string) {
     return;
   }
 }
+
+export async function updateUserImage(userId: string, image: string) {
+  const id = parseInt(userId);
+
+  if (typeof id !== "number" || Number.isNaN(id)) {
+    throw new Error("invalid id");
+  }
+
+  try {
+    const result = await pool.query(
+      "UPDATE users SET image = $1 WHERE id = $2",
+      [image, id],
+    );
+
+    return;
+  } catch (error) {
+    console.log("error fetching database", error);
+    return false;
+  }
+}
