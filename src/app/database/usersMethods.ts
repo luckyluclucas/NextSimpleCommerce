@@ -93,3 +93,22 @@ export async function updateUserImage(userId: string, image: string) {
     return false;
   }
 }
+
+export async function getUserRole(userId: string) {
+  const id = parseInt(userId);
+
+  if (isNaN(id) || typeof id !== "number") {
+    return false;
+  }
+
+  try {
+    const result = await pool.query("SELECT role FROM users WHERE id = $1", [
+      id,
+    ]);
+    const { role } = result.rows[0];
+    return role;
+  } catch (error) {
+    console.log("error while fetching database", error);
+    return false;
+  }
+}

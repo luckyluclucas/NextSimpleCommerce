@@ -63,7 +63,7 @@ export default function Header() {
 
   return (
     <header
-      className={`${isHomePage && isAtTop ? "bg-transparent dark:bg-black/90 border-transparent" : "bg-white dark:bg-black/90"} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}
+      className={`${isHomePage && isAtTop ? "bg-transparent dark:bg-[#09090a]/80 border-transparent" : "bg-white dark:bg-[#09090a]/80"} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}
     >
       <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
         <div className="md:flex flex-start max-w-fit hidden text-xl grow-2 list-none">

@@ -40,6 +40,12 @@ export default function SidebarApp({
   const sideMenuItems = [
     ...menuItens,
     {
+      title: "Account Settings",
+      href: "/myaccount",
+      hasDropDownMenu: false,
+      hasFunction: false,
+    },
+    {
       title: session ? "Sign Out" : "Sign in",
       href: session ? "signOut" : "/signIn",
       hasDropDownMenu: false,

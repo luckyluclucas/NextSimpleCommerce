@@ -35,7 +35,7 @@ export default function UserAvatar() {
 
   if (session) {
     return (
-      <Link href="/">
+      <Link href="/myaccount">
         <Avatar>
           <AvatarImage
             src={

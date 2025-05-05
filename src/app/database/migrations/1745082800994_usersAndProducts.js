@@ -22,6 +22,7 @@ exports.up = (pgm) => {
       default: pgm.func("CURRENT_TIMESTAMP"),
     },
     password: { type: "text" },
+    role: { type: "varchar(50)", notNull: true, default: "user" },
   });
 
   pgm.createTable("sessions", {
