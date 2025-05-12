@@ -59,13 +59,13 @@ export default async function productPage({
           {ProductData.title}
         </h1>
         <div className="w-full h-full min-h-0 grid grid-rows md:grid-cols-2">
-          <div className="col-span-1 w-auto h-full flex content-center flex-col">
+          <div className="col-span-1 w-auto h-full flex content-center flex-col rounded-xl px-2">
             <Image
               width={512}
-              height={312}
+              height={512}
               src={ProductData.image}
               alt=""
-              className="justify-self-center m-auto"
+              className="justify-self-center m-auto mb-4 w-full h-full rounded-xl"
             ></Image>
             <div className="w-full mt-auto border-2 border-border my-2 flex content-end items-end justify-end h-[100px]"></div>
           </div>
@@ -116,17 +116,17 @@ export default async function productPage({
                   <div className="hidden lg:flex justify-end content-center gap-2 ml-auto items-center align-center">
                     <Link href={`/carrinho`} className="cursor-pointer">
                       <Button
-                        size="xlg"
-                        className="text-xl cursor-pointer dark:bg-secondary"
+                        size="lg"
+                        className="text-xl h-14 cursor-pointer dark:text-white font-bold dark:bg-chart-2"
                       >
                         Comprar
                       </Button>
                     </Link>
 
-                    <Button className="h-14 cursor-pointer dark:bg-secondary">
+                    <Button className="h-14 cursor-pointer dark:bg-chart-2/80">
                       <ShoppingCartIcon
                         size={24}
-                        className="!size-12 cursor-pointer"
+                        className="!size-12 cursor-pointer dark:text-white"
                       />
                     </Button>
                   </div>

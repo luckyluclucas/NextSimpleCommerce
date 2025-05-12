@@ -17,9 +17,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
   const { addToCart, cart } = useCart();
 
   return (
-    <Card className="h-content aspec-[3/4] mb-6 hover:scale-101 bg-[var(--background)] flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
+    <Card className="h-content aspec-[3/4] mb-6 p-0 m-0 hover:scale-101 bg-[var(--background)] flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
       <Link href={productLink}>
-        <CardContent className="m-0">
+        <CardContent className="m-0 p-0">
           <Image
             className="sm:w-full h-full p-2 object-cover rounded-lg aspect-square"
             src={product.image}
@@ -29,14 +29,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
           />
         </CardContent>
 
-        <CardHeader className="p-1">
+        <CardHeader className="p-1 m-0">
           <CardTitle className="text-base h-[3em] font-semibold line-clamp-3">
             {product.title}
           </CardTitle>
-          <span className="text-sm mt-4 text-gray-600 dark:text-zinc-400">
+          <span className="text-sm mt-0 text-gray-600 dark:text-zinc-400">
             <s>R$ {product.price}</s>
           </span>
-          <span className="text-xl mt-0 text-primary font-semibold rounded py-1 bg-[var(--background)] justify-start mr-auto">
+          <span className="text-xl m-0 text-primary font-semibold rounded py-0 bg-[var(--background)] justify-start mr-auto">
             R$ {product.price}
           </span>
           <span className="line-clamp-1 mt-0 p-0 text-sm dark:text-zinc-400 text-gray-500">
@@ -48,7 +48,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
           </span>
         </CardHeader>
       </Link>
-      <div className="m-1">
+      <div className="mx-1 mb-1">
         <Button
           onClick={() => {
             addToCart(product);
