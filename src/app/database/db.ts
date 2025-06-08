@@ -1,17 +1,18 @@
 import "server-only";
 import pool from "./pool";
+import { product } from "../types/product";
 
 export async function getProductData(offset: number, limit: number) {
   if (offset === undefined || limit === undefined) {
     throw new Error(
-      `one or two arguments are missing out, please provide a limit and an offset`,
+      `one or two arguments are missing out, please provide a limit and an offset`
     );
   }
 
   if (isNaN(limit) || isNaN(offset) || limit <= 0 || offset < 0) {
     console.log(limit + offset);
     throw new Error(
-      `Invalid Input: Please provide exactly two arguments. Both arguments must be integers greater than zero.`,
+      `Invalid Input: Please provide exactly two arguments. Both arguments must be integers greater than zero.`
     );
   }
 
@@ -37,14 +38,14 @@ export async function getAllProducts() {
   }
 }
 
-export async function getProductById(id: number) {
-  if (isNaN(parseInt(id))) {
+export async function getProductById(id: number): Promise<product | undefined> {
+  if (!Number.isInteger(id)) {
     throw new Error("id should be a number");
   }
 
   try {
     const Data = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
-    const product = await Data.rows;
+    const product: product = await Data.rows[0];
     return product;
   } catch (error) {
     console.log("error while trying to connnect to database", error);
@@ -59,5 +60,4 @@ export async function getTotalNumberOfProducts() {
   } catch (error) {
     console.log("error while querying database" + error);
   }
-
 }

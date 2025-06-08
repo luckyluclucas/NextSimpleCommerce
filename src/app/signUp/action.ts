@@ -5,7 +5,7 @@ import { CreateUser } from "../database/usersMethods";
 
 export default async function HandleSignUp(
   prevState: { message: string },
-  formData: FormData,
+  formData: FormData
 ) {
   const userData = {
     username: formData.get("username") as string,
@@ -22,7 +22,7 @@ export default async function HandleSignUp(
       }
 
       return acc;
-    }, {});
+    }, {} as Record<string, string>);
 
     //console.log(parsedResult.error.issues);
     console.log(error);

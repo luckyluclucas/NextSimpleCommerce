@@ -43,7 +43,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async linkAccount({ user, account, profile }) {
       if (account.provider !== "credentials") {
         if (!user.image && profile.image) {
-          updateUserImage(user.id, profile.image);
+          updateUserImage(user.id as string, profile.image);
         }
       }
     },
@@ -52,7 +52,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        const role = await getUserRole(user.id);
+        const role = await getUserRole(user.id as string);
         if (role !== "admin") {
           return token;
         } else {
@@ -65,7 +65,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     async session({ token, session, user }) {
       if (token.role) {
-        session.user.role = token.role;
+        session.user.role = token.role as string;
         console.log(session);
         return session;
       }

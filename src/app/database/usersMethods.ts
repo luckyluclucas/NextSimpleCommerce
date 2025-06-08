@@ -15,11 +15,10 @@ export async function CreateUser(userData: {
   try {
     const userExists = await pool.query(
       "SELECT 1 FROM users WHERE email = $1 OR name = $2 LIMIT 1;",
-      [email, username],
+      [email, username]
     );
 
-    if (userExists.rowCount > 0) {
-      throw new Error("Username or email already in use");
+    if (userExists.rowCount != null) {
       return { message: "Invalid Credentials" };
     }
   } catch (error) {
@@ -30,7 +29,7 @@ export async function CreateUser(userData: {
   try {
     const { rows } = await pool.query(
       "INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETURNING name, image;",
-      [username, email, password],
+      [username, email, password]
     );
     console.log(rows[0]);
     return rows[0];
@@ -44,14 +43,14 @@ export async function AuthenticateUser(email: string, password: string) {
   if (!email || !password) {
     console.log(email, password);
     throw new Error(
-      "INVALID CREDENTIALS, ONE OR TWO OF THE INPUTS ARE MISSING OR UNDEFINED",
+      "INVALID CREDENTIALS, ONE OR TWO OF THE INPUTS ARE MISSING OR UNDEFINED"
     );
   }
   try {
     const e = email.toLowerCase().trim().toString();
     const result = await pool.query(
       "SELECT name, id, image, password FROM users WHERE email = $1",
-      [e],
+      [e]
     );
     let user = result.rows[0];
     if (!user) {
@@ -84,7 +83,7 @@ export async function updateUserImage(userId: string, image: string) {
   try {
     const result = await pool.query(
       "UPDATE users SET image = $1 WHERE id = $2",
-      [image, id],
+      [image, id]
     );
 
     return;
@@ -94,7 +93,7 @@ export async function updateUserImage(userId: string, image: string) {
   }
 }
 
-export async function getUserRole(userId: string) {
+export async function getUserRole(userId: string): Promise<string | boolean> {
   const id = parseInt(userId);
 
   if (isNaN(id) || typeof id !== "number") {

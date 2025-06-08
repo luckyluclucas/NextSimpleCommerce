@@ -22,7 +22,7 @@ export default async function MyAccountPage() {
           </p>
         </div>
         <Separator className="dark:bg-[#242427] w-full" />
-        <ProfileForm />
+        <ProfileForm username={session.user.name as string} />
         <h1> ONLY ADMINS CAN SEE IT</h1>
       </div>
     );
@@ -38,7 +38,7 @@ export default async function MyAccountPage() {
         </p>
       </div>
       <Separator className="dark:bg-[#242427] w-full" />
-      <ProfileForm username={user} />
+      <ProfileForm username={user as string} />
     </div>
   );
 }

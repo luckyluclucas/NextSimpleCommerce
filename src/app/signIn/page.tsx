@@ -56,8 +56,8 @@ export default function SignInPage() {
 
   const providerMap = [{ id: "google", name: "Google" }];
 
-  const onSubmit = async (formData: FormData) => {
-    await signIn("credentials", formData);
+  const onSubmit = async (data: { username: string; password: string }) => {
+    await signIn("credentials", data);
   };
   return (
     <div className="mt-24 bg-[var(--foreground)] w-full max-w-[580px] mx-auto px-4 my-8 justify-center items-center content-center rounded">

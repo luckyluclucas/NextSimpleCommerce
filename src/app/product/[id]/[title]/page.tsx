@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCartIcon, Truck } from "lucide-react";
 import Link from "next/link";
 import slugify from "slugify";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { redirect } from "next/navigation";
 
 async function GetProductData<product>(
@@ -67,7 +68,34 @@ export default async function productPage({
               alt=""
               className="justify-self-center m-auto mb-4 w-full h-full rounded-xl"
             ></Image>
-            <div className="w-full mt-auto border-2 border-border my-2 flex content-end items-end justify-end h-[100px]"></div>
+            <div className="mt-auto border-2 border-border my-2 px-2 h-[100px]">
+              <Carousel orientation={"horizontal"} className="bg-red-800 p-1 h-full">
+                <CarouselContent className="px-6">
+                  <CarouselItem className="dark:text-white sm:basis-1/5 mx-1">
+                    <Image
+                      width={112}
+                      height={112}
+                      src={ProductData.image}
+                      alt=""
+
+                    >
+
+                    </Image>
+                  </CarouselItem>
+                  <CarouselItem className="dark:text-white">
+                    <Image
+                      width={112}
+                      height={112}
+                      src={ProductData.image}
+                      alt=""
+
+                    >
+
+                    </Image>
+                  </CarouselItem>
+                </CarouselContent>
+              </Carousel>
+            </div>
           </div>
 
           <div className="col-span-1 w-auto h-full flex flex-col">

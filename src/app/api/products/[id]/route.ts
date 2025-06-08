@@ -11,7 +11,7 @@ export async function GET(
     params: Promise<{
       id: number;
     }>;
-  },
+  }
 ) {
   const { id } = await params;
   if (isNaN(id)) {
@@ -22,16 +22,15 @@ export async function GET(
     NextResponse.json({ error: "id inválido" }, { status: 400 });
   }
 
-  const products: product[] = await getProductById(id);
-  
-  const productData = products.find((p) => p.id == id);
+  const product = await getProductById(id);
 
-  if (!productData) {
+  if (!product) {
     return NextResponse.json(
       { error: "produto não econtrado" },
-      { status: 404 },
+      { status: 404 }
     );
+  } else {
+    const productData: product = product;
+    return NextResponse.json(productData, { status: 200 });
   }
-
-  return NextResponse.json(productData, { status: 200 });
 }

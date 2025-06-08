@@ -26,14 +26,12 @@ export default async function ProductsPage({
     return redirect("/product");
   }
 
-  let products: product[];
-
   if (page === undefined && params.length == 0) {
-    products = await getProductData(0, 10);
-  } else {
-    let n = parseInt(page);
-    products = await getProductData(n, 10);
+    const products: product[] = await getProductData(0, 10);
   }
+
+  let n = page !== undefined ? parseInt(page) : 0;
+  const products: product[] = await getProductData(n, 10);
 
   const totalNumberOfProducts = await getTotalNumberOfProducts();
 
@@ -54,7 +52,9 @@ export default async function ProductsPage({
                   >
                     <ProductCard
                       product={product}
-                      productLink={`/product/${product.id}/${slugify(product.title)}`}
+                      productLink={`/product/${product.id}/${slugify(
+                        product.title
+                      )}`}
                     />
                   </div>
                 ))}
