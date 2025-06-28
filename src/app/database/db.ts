@@ -38,8 +38,9 @@ export async function getAllProducts() {
   }
 }
 
-export async function getProductById(id: number): Promise<product | undefined> {
-  if (!Number.isInteger(id)) {
+export async function getProductById(id: string): Promise<product | undefined> {
+  const iD = parseInt(id);
+  if (!Number.isInteger(iD)) {
     throw new Error("id should be a number");
   }
 

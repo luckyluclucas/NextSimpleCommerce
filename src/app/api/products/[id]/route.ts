@@ -9,15 +9,15 @@ export async function GET(
     params,
   }: {
     params: Promise<{
-      id: number;
+      id: string;
     }>;
   }
 ) {
   const { id } = await params;
-  if (isNaN(id)) {
+  if (isNaN(parseInt(id))) {
     NextResponse.json({ error: "id inválido" }, { status: 400 });
   }
-  const productId = await id;
+  const productId = await parseInt(id);
   if (isNaN(productId)) {
     NextResponse.json({ error: "id inválido" }, { status: 400 });
   }

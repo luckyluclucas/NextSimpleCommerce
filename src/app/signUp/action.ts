@@ -4,7 +4,11 @@ import z from "zod";
 import { CreateUser } from "../database/usersMethods";
 
 export default async function HandleSignUp(
-  prevState: { message: string },
+  prevState: {
+    message: string | Record<string, string>;
+    success: boolean;
+    error?: boolean;
+  },
   formData: FormData
 ) {
   const userData = {

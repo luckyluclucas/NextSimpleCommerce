@@ -50,7 +50,7 @@ export default function SignUp() {
 
   const [state, handleSignUpFormAction, isPending] = useActionState(
     HandleSignUp,
-    { message: "" },
+    { message: "", success: false, error: false }
   );
 
   useEffect(() => {

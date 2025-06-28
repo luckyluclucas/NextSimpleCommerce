@@ -21,15 +21,8 @@ export default function ProductsPagination({
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  let page;
   const currentPage = parseInt(searchParams.get("page") || "1");
-  if (!searchParams.has("page") || page === null) {
-    page = 1;
-    console.log(page);
-  } else {
-    page = searchParams.get("page");
-    console.log(page);
-  }
+  const page: string | null = searchParams.get("page") || "1";
 
   function setCurrentPage(page: number) {
     if (page === 0 || page > totalNumberOfPages) {
@@ -45,13 +38,12 @@ export default function ProductsPagination({
     navigationPages.push(
       totalNumberOfPages - 2,
       totalNumberOfPages - 1,
-      totalNumberOfPages,
+      totalNumberOfPages
     );
   } else {
     navigationPages.push(currentPage - 1, currentPage, currentPage + 1);
   }
 
-  console.log(totalNumberOfPages);
   return (
     <Pagination className="dark:!text-white mt-2 min-h-16">
       <PaginationContent className="text-white">
@@ -67,7 +59,7 @@ export default function ProductsPagination({
           <PaginationItem key={p}>
             <PaginationLink
               isActive={p === currentPage}
-              onClick={() => setCurrentPage(parseInt(p))}
+              onClick={() => setCurrentPage(Number(p))}
               className="dark:!text-white !text-black !text-lg"
               href="#"
             >
