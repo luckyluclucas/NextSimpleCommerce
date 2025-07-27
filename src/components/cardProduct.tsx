@@ -15,14 +15,14 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
   const { addToCart, cart } = useCart();
-
+  const mainImage = product.images.find((image) => image.isMain);
   return (
     <Card className="h-content aspec-[3/4] mb-6 p-0 m-0 hover:scale-101 bg-[var(--background)] flex-col flex hover:z-10 transition-all duration-500 ease-in-out justify-center rounded-lg">
       <Link href={productLink}>
         <CardContent className="m-0 p-0">
           <Image
             className="sm:w-full h-full p-2 object-cover rounded-lg aspect-square"
-            src={product.image}
+            src={mainImage.imageUrl}
             width={512}
             height={512}
             alt="image"

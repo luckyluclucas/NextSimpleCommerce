@@ -12,7 +12,11 @@ exports.shorthands = undefined;
 exports.up = (pgm) => {
   pgm.createTable("users", {
     id: "id",
-    name: { type: "varchar(255)", unique: true, notNull: true },
+    name: {
+      type: "varchar(255)",
+      unique: true,
+      notNull: true,
+    },
     email: { type: "varchar(255)", unique: true, notNull: true },
     emailVerified: { type: "timestamp" },
     image: { type: "TEXT" },
@@ -27,14 +31,24 @@ exports.up = (pgm) => {
 
   pgm.createTable("sessions", {
     id: "id",
-    userId: { type: "integer", notNull: true },
+    userId: {
+      type: "integer",
+      notNull: true,
+      references: "users(id)",
+      onDelete: "CASCADE",
+    },
     expires: { type: "timestamp", notNull: true },
     sessionToken: { type: "varchar(255)", notNull: true },
   });
 
   pgm.createTable("accounts", {
     id: "id",
-    userId: { type: "integer", notNull: true },
+    userId: {
+      type: "integer",
+      notNull: true,
+      references: "users(id)",
+      onDelete: "CASCADE",
+    },
     type: { type: "varchar(255)", notNull: true },
     provider: { type: "varchar(255)", notNull: true },
     providerAccountId: { type: "varchar(255)", notNull: true },
@@ -47,11 +61,15 @@ exports.up = (pgm) => {
     token_type: { type: "text" },
   });
 
-  pgm.createTable("verification_token", {
-    identifier: { type: "text", notNull: true, primaryKey: true },
-    expires: { type: "timestamp", notNull: true },
-    token: { type: "text", notNull: true },
-  });
+  pgm.createTable(
+    "verification_token",
+    {
+      identifier: { type: "text", notNull: true },
+      expires: { type: "timestamp", notNull: true },
+      token: { type: "text", notNull: true },
+    },
+    { primaryKey: ["identifier", "token"] }
+  );
 
   pgm.createTable("products", {
     id: "id",
@@ -59,7 +77,40 @@ exports.up = (pgm) => {
     price: { type: "decimal(10, 2)", notNull: true },
     description: { type: "text", notNull: true },
     stock: { type: "integer", notNull: true },
-    image: { type: "text", notNull: true },
+    isActive: { type: "boolean", default: true },
+    created_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CURRENT_TIMESTAMP"),
+    },
+    updated_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CURRENT_TIMESTAMP"),
+    },
+  });
+
+  pgm.createTable("product_image", {
+    id: "id",
+    product_id: {
+      type: "integer",
+      notNull: true,
+      references: "products(id)",
+      onDelete: "CASCADE",
+    },
+    is_main: { type: "boolean", default: false },
+    alt_text: { type: "varchar(255)" },
+    image_url: { type: "varchar(255)" },
+    created_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CURRENT_TIMESTAMP"),
+    },
+    updated_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CURRENT_TIMESTAMP"),
+    },
   });
 };
 
@@ -68,4 +119,4 @@ exports.up = (pgm) => {
  * @param run {() => void | undefined}
  * @returns {Promise<void> | void}
  */
-exports.down = (pgm) => { };
+exports.down = (pgm) => {};

@@ -3,7 +3,10 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import ProductCard from "@/components/cardProduct";
 import slugify from "slugify";
 import "../globals.css";
-import { getProductData, getTotalNumberOfProducts } from "@/app/database/db";
+import {
+  fetchPaginatedProducts,
+  getTotalNumberOfProducts,
+} from "@/app/database/db";
 import { product } from "../types/product";
 import { redirect } from "next/navigation";
 import ProductsPagination from "@/components/Pagination";
@@ -27,11 +30,11 @@ export default async function ProductsPage({
   }
 
   if (page === undefined && params.length == 0) {
-    const products: product[] = await getProductData(0, 10);
+    const products: product[] = await fetchPaginatedProducts(0, 10);
   }
 
   let n = page !== undefined ? parseInt(page) : 0;
-  const products: product[] = await getProductData(n, 10);
+  const products: product[] = await fetchPaginatedProducts(n, 10);
 
   const totalNumberOfProducts = await getTotalNumberOfProducts();
 

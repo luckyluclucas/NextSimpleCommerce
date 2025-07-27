@@ -53,8 +53,8 @@ const sidebarAdminItems = [
     href: "/dashboard",
   },
   {
-    title: "Create / Update / Delete new products",
-    href: "/dashboard/products/crud",
+    title: "Create new products",
+    href: "/dashboard/createProduct",
   },
   {
     title: "List all users",

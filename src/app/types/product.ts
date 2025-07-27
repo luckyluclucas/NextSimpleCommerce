@@ -1,5 +1,10 @@
+export type image = {
+  imageUrl: string;
+  altText: string;
+  isMain: boolean;
+};
 export interface product {
-  image: string;
+  images: image[];
   id: number;
   title: string;
   description: string;
