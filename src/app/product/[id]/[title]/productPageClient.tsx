@@ -16,12 +16,13 @@ import { UseEmblaCarouselType } from "embla-carousel-react";
 import useCart from "@/hooks/useCart";
 import ShippingCalculatorInput from "@/components/shippingCalculatorInput";
 import { RiTruckFill } from "react-icons/ri";
+import Decimal from "decimal.js";
 
 export default function ProductPage({ product }: { product: product }) {
   const mainImage = product.images.find((img) => img.isMain);
   const secondaryImages: image[] = product.images;
 
-  const [activedImage, setActivedImage] = useState(mainImage.imageUrl);
+  const [activedImage, setActivedImage] = useState(mainImage?.imageUrl);
   const { addToCart } = useCart();
 
   const [emblaRef, emblaApi] = useEmblaCarousel();
@@ -137,7 +138,7 @@ export default function ProductPage({ product }: { product: product }) {
                 <div className="flex gap-1">
                   <span className="font-bold text-3xl md:text-5xl line-clamp-none text-primary">
                     R$
-                    {product.price}
+                    {new Decimal(product.price).toFixed(2)}
                   </span>
                   <div className="hidden lg:flex justify-end content-center gap-2 ml-auto items-center align-center">
                     <Link href={`/carrinho`} className="cursor-pointer">

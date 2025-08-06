@@ -7,6 +7,10 @@ type product = {
   stock: number;
   price: Decimal;
   description: string;
+  width: Decimal;
+  height: Decimal;
+  length: Decimal;
+  weight: Decimal;
 };
 
 type image = {
@@ -20,8 +24,17 @@ export async function CreateProduct(product: product, images: image[]) {
     await client.query("BEGIN");
 
     const result = await pool.query(
-      `INSERT INTO products(title, stock, price, description) VALUES($1, $2, $3, $4) RETURNING id`,
-      [product.title, product.stock, product.price, product.description]
+      `INSERT INTO products(title, stock, price, description, width, height, length, weight) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id`,
+      [
+        product.title,
+        product.stock,
+        product.price,
+        product.description,
+        product.width,
+        product.height,
+        product.length,
+        product.weight,
+      ]
     );
 
     const id = result.rows[0].id;

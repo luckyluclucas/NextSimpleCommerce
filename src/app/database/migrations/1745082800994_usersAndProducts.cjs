@@ -123,14 +123,14 @@ exports.up = (pgm) => {
     user_id: {
       type: "integer",
       notNull: true,
-      references: "user(id)",
+      references: "users(id)",
       onDelete: "CASCADE",
       unique: true,
     },
     created_at: {
       type: "timestamp",
       notNull: true,
-      default: pgm.func("CaURRENT_TIMESTAMP"),
+      default: pgm.func("CURRENT_TIMESTAMP"),
     },
     updated_at: {
       type: "timestamp",
@@ -141,11 +141,11 @@ exports.up = (pgm) => {
 
   pgm.createTable("cart_items", {
     id: "id",
-    user_id: { type: "integer", references: "user(id)", onDelete: "CASCADE" },
+    user_id: { type: "integer", references: "users(id)", onDelete: "CASCADE" },
     cart_id: { type: "integer", references: "cart(id)", onDelete: "CASCADE" },
     product_id: {
       type: "integer",
-      references: "product(id",
+      references: "products(id)",
       notNull: true,
       onDelete: "CASCADE",
     },
@@ -153,7 +153,7 @@ exports.up = (pgm) => {
     created_at: {
       type: "timestamp",
       notNull: true,
-      default: pgm.func("CaURRENT_TIMESTAMP"),
+      default: pgm.func("CURRENT_TIMESTAMP"),
     },
     updated_at: {
       type: "timestamp",

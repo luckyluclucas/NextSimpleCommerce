@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { getProductById } from "@/app/database/db";
 import { image } from "@/app/types/product";
 import ProductPage from "./productPageClient";
+import { notFound } from "next/navigation";
 
 export default async function productPage({
   params,
@@ -16,18 +17,20 @@ export default async function productPage({
   if (isNaN(parseInt(id))) {
     return NextResponse.json({ error: "it's not a id" }, { status: 400 });
   }
-  const ProductData: product = await getProductById(id);
-
+  const productData: product | undefined = await getProductById(id);
+  if (!productData) {
+    return notFound();
+  }
   const { title } = await params;
-  const mainImage = ProductData.images.find((img) => img.isMain);
-  const secondaryImages: image[] = ProductData.images.filter(
+  const mainImage = productData.images.find((img) => img.isMain);
+  const secondaryImages: image[] = productData.images.filter(
     (img) => !img.isMain
   );
-  const correctTitle = slugify(ProductData.title);
+  const correctTitle = slugify(productData.title);
 
   if (title !== correctTitle) {
-    return redirect(`/product/${ProductData.id}/${slugify(correctTitle)}`);
+    return redirect(`/product/${productData.id}/${slugify(correctTitle)}`);
   }
 
-  return <ProductPage product={ProductData} />;
+  return <ProductPage product={productData} />;
 }

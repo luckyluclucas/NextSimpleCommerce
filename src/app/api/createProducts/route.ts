@@ -39,6 +39,10 @@ export async function POST(request: NextRequest) {
     price: data.get("price") as string,
     stock: data.get("stock") as string,
     description: data.get("description") as string,
+    width: data.get("width") as string,
+    height: data.get("height") as string,
+    length: data.get("length") as string,
+    weight: data.get("weight") as string,
   };
 
   const resolver = productSchema.safeParse(productData);
@@ -89,9 +93,13 @@ export async function POST(request: NextRequest) {
   }
   const product = {
     title: productData.title,
-    price: new Decimal(productData.price).toDecimalPlaces(4).toFixed(4),
+    price: new Decimal(productData.price).toDecimalPlaces(4).toNumber(),
     stock: parseInt(productData.stock),
     description: productData.description,
+    width: new Decimal(productData.width).toNumber(),
+    height: new Decimal(productData.height).toNumber(),
+    length: new Decimal(productData.length).toNumber(),
+    weight: new Decimal(productData.weight).toNumber(),
   };
 
   try {

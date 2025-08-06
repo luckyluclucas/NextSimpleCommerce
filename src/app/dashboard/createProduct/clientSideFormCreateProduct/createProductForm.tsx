@@ -17,11 +17,12 @@ import { UndoDot } from "lucide-react";
 import Link from "next/link";
 import { Textarea } from "@/components/ui/textarea";
 import ImageUploaderCustom from "@/components/image-upload-form";
+import Decimal from "decimal.js";
 
 export default function CreateProductForm() {
   const CreateProductSchema = z.object({
     title: z.string().nonempty({ message: "The title can not be empty" }),
-    price: z.coerce.number({
+    price: z.string({
       message: "the price shoud be a number, not words ou invalid characteres",
     }),
     stock: z.coerce.number({
@@ -38,16 +39,24 @@ export default function CreateProductForm() {
         previewUrl: z.string().optional(),
       })
     ),
+    width: z.coerce.number(),
+    height: z.coerce.number(),
+    length: z.coerce.number(),
+    weight: z.coerce.number(),
   });
 
   const createProductForm = useForm<z.infer<typeof CreateProductSchema>>({
     resolver: zodResolver(CreateProductSchema),
     defaultValues: {
       title: "",
-      price: "",
+      price: "999.99",
       stock: "",
       description: "",
       images: [],
+      width: "",
+      height: "",
+      length: "",
+      weight: "",
     },
   });
 
@@ -63,6 +72,10 @@ export default function CreateProductForm() {
     data.append("price", formData.price);
     data.append("stock", formData.stock);
     data.append("description", formData.description);
+    data.append("width", formData.width);
+    data.append("height", formData.height);
+    data.append("length", formData.length);
+    data.append("weight", formData.weight);
 
     if (!formData.images) {
       return;
@@ -126,7 +139,11 @@ export default function CreateProductForm() {
                   <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
                 </div>
                 <FormControl>
-                  <Input className="max-w-28 h-8" placeholder="" {...field} />
+                  <Input
+                    className="max-w-28 h-8"
+                    placeholder="R$ 9.999,99"
+                    {...field}
+                  />
                 </FormControl>
                 <FormDescription></FormDescription>
               </FormItem>
@@ -144,7 +161,7 @@ export default function CreateProductForm() {
                 <FormControl>
                   <Input
                     className="max-w-18 h-6 text-sm"
-                    placeholder=""
+                    placeholder="0"
                     {...field}
                   />
                 </FormControl>
@@ -152,6 +169,72 @@ export default function CreateProductForm() {
               </FormItem>
             )}
           />
+          <div className="flex flex-row gap-2">
+            <FormField
+              control={createProductForm.control}
+              name="width"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="w-full flex flex-row gap-2 justify-between items-center">
+                    <FormLabel className="">Width</FormLabel>
+                    <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
+                  </div>
+                  <FormControl>
+                    <Input className="max-w-28 h-8" placeholder="" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={createProductForm.control}
+              name="height"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="w-full flex flex-row gap-2 justify-between items-center">
+                    <FormLabel className="">Height</FormLabel>
+                    <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
+                  </div>
+                  <FormControl>
+                    <Input className="max-w-28 h-8" placeholder="" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={createProductForm.control}
+              name="length"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="w-full flex flex-row gap-2 justify-between items-center">
+                    <FormLabel className="">Length</FormLabel>
+                    <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
+                  </div>
+                  <FormControl>
+                    <Input className="max-w-28 h-8" placeholder="" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={createProductForm.control}
+              name="weight"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="w-full flex flex-row gap-2 justify-between items-center">
+                    <FormLabel className="">Weight</FormLabel>
+                    <FormMessage className="bg-[var(--color-destructive)] text-gray-100 p-1 rounded" />
+                  </div>
+                  <FormControl>
+                    <Input className="max-w-28 h-8" placeholder="" {...field} />
+                  </FormControl>
+                  <FormDescription></FormDescription>
+                </FormItem>
+              )}
+            />
+          </div>
           <FormField
             control={createProductForm.control}
             name="description"
