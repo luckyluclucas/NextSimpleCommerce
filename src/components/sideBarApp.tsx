@@ -93,7 +93,7 @@ export default function SidebarApp({
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="text-gray-300 dark:text-white">
+            <SidebarMenu className="dark:text-white">
               {sideMenuItems.map((item) => {
                 return (
                   <SidebarMenuItem className="" key={item.title}>
@@ -107,7 +107,7 @@ export default function SidebarApp({
                           action={SignOut}
                         >
                           <button
-                            className="cursor-pointer w-full text-start"
+                            className="cursor-pointer font-semibold w-full text-start"
                             type="submit"
                           >
                             Sign Out

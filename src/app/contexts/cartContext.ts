@@ -7,6 +7,7 @@ interface CartContextType {
   addToCart: (product: product) => void;
   removeFromCart: (id: number) => void;
   decreaseFromCart: (id: number) => void;
+  increaseFromCart: (id: number) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);

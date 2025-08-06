@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
 import { SidebarNav } from "./components/sidenavBar";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "settings",
@@ -76,7 +77,7 @@ export default async function SettingsLayout({
   const session = await auth();
 
   if (!session) {
-    return;
+    return redirect("signIn");
   }
 
   if (session.user?.role === "admin") {

@@ -1,3 +1,5 @@
+import { Decimal } from "decimal.js";
+
 export type image = {
   imageUrl: string;
   altText: string;
@@ -8,6 +10,7 @@ export interface product {
   id: number;
   title: string;
   description: string;
-  price: string;
+  price: Decimal;
   tags?: string | string[];
+  isInPromotion: boolean;
 }

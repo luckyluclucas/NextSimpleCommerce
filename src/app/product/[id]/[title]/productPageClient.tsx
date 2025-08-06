@@ -10,20 +10,32 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { ShoppingCartIcon, Truck } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { UseEmblaCarouselType } from "embla-carousel-react";
+import useCart from "@/hooks/useCart";
+import ShippingCalculatorInput from "@/components/shippingCalculatorInput";
+import { RiTruckFill } from "react-icons/ri";
 
 export default function ProductPage({ product }: { product: product }) {
   const mainImage = product.images.find((img) => img.isMain);
   const secondaryImages: image[] = product.images;
 
   const [activedImage, setActivedImage] = useState(mainImage.imageUrl);
+  const { addToCart } = useCart();
 
+  const [emblaRef, emblaApi] = useEmblaCarousel();
+  const canScrollnext = emblaApi?.canScrollNext;
   return (
-    <main className="w-full p-2 md:p-0 x-auto mt-[80px]">
+    <main className="w-full p-2 md:p-0 mt-[120px]">
       <div className="grid grid-rows-[120px_minmax(600px,1fr)_100px] h-[700px] w-full max-w-[1280px] mx-auto font-[family-name:var(--font-geist-sans)]">
-        <h1 className="w-full h-[60px] px-1 text-4xl/4 font-bold content-center m-auto">
-          {product.title}
-        </h1>
+        {product.isInPromotion ? (
+          <h1 className="w-full h-[60px] px-1 text-4xl/4 font-bold content-center m-auto">
+            {product.title}
+          </h1>
+        ) : (
+          ""
+        )}
         <div className="w-full h-full min-h-0 grid grid-rows md:grid-cols-2">
           <div className="col-span-1 w-auto h-full flex content-center flex-col rounded-xl px-2">
             <Image
@@ -33,13 +45,18 @@ export default function ProductPage({ product }: { product: product }) {
               alt=""
               className="justify-self-center m-auto mb-4 w-full h-full rounded-xl"
             ></Image>
-            <div className="mt-auto my-2 px-2 h-fit">
+            <div className="mt-auto my-2 h-fit">
               <Carousel
-                opts={{ dragFree: false, align: "start" }}
+                opts={{
+                  watchDrag: true,
+                  dragFree: false,
+                  containScroll: "trimSnaps",
+                  align: "start",
+                }}
                 orientation={"horizontal"}
-                className=" p-1 h-full mx-4"
+                className="md:p-1 h-full"
               >
-                <CarouselContent className="px-6 gap-2">
+                <CarouselContent className="gap-2">
                   {secondaryImages.map((img, i) => (
                     <CarouselItem
                       key={i}
@@ -57,8 +74,8 @@ export default function ProductPage({ product }: { product: product }) {
                         className={`rounded justify-center ${
                           img.imageUrl === activedImage ? "" : ""
                         }`}
-                        width={100}
-                        height={80}
+                        width={60}
+                        height={40}
                         src={img.imageUrl}
                         alt={img.altText}
                       ></Image>
@@ -68,25 +85,32 @@ export default function ProductPage({ product }: { product: product }) {
               </Carousel>
             </div>
           </div>
-
           <div className="col-span-1 w-auto h-full flex flex-col">
-            <div className="rounded-lg grid grid-rows-2 bg-primary dark:bg-secondary h-40 text-lg font-medium p-4 text-white">
-              <div className="grid grid-cols-2 content-center">
-                <div className="">Promotion</div>
-                <div className="justify-self-end">
-                  It will be finished in 3 days
+            {product.isInPromotion ? (
+              <div className="rounded-lg grid grid-rows-2 bg-primary dark:bg-secondary h-40 text-lg font-medium p-4 text-white">
+                <div className="grid grid-cols-2 content-center">
+                  <div className="">Promotion</div>
+                  <div className="justify-self-end">
+                    It will be finished in 3 days
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 content-center">
+                  <span>DESCONTO DE 5%</span>
+                  <Separator
+                    orientation="vertical"
+                    className="mx-auto h-[120px]"
+                  />
+                  <span className="justify-self-end">em estoque</span>
                 </div>
               </div>
-
-              <div className="grid grid-cols-3 content-center">
-                <span>DESCONTO DE 5%</span>
-                <Separator
-                  orientation="vertical"
-                  className="mx-auto h-[120px]"
-                />
-                <span className="justify-self-end">em estoque</span>
+            ) : (
+              <div className="rounded-lg text-black dark:bg-secondary my-2 md:h-40 text-lg font-medium dark:text-white">
+                <h1 className="w-full px-1 text-2xl md:text-4xl font-bold m-auto">
+                  {product.title}
+                </h1>
               </div>
-            </div>
+            )}
             <div className="p-2">
               <div className="py-2 gap-2 text-sm hidden lg:flex text-nowrap">
                 <span className="text-gray-600 dark:text-zinc-400 ">
@@ -111,7 +135,7 @@ export default function ProductPage({ product }: { product: product }) {
               </div>
               <div className="py-2">
                 <div className="flex gap-1">
-                  <span className="font-bold text-5xl line-clamp-none text-primary">
+                  <span className="font-bold text-3xl md:text-5xl line-clamp-none text-primary">
                     R$
                     {product.price}
                   </span>
@@ -125,7 +149,10 @@ export default function ProductPage({ product }: { product: product }) {
                       </Button>
                     </Link>
 
-                    <Button className="h-14 cursor-pointer dark:bg-chart-2/80">
+                    <Button
+                      onClick={() => addToCart(product)}
+                      className="h-14 cursor-pointer dark:bg-chart-2/80"
+                    >
                       <ShoppingCartIcon
                         size={24}
                         className="!size-12 cursor-pointer dark:text-white"
@@ -136,12 +163,45 @@ export default function ProductPage({ product }: { product: product }) {
                 <span className="p-2 line-clamp-1 text-sm text-gray-500 dark:text-zinc-400 ">
                   A vista no PIX
                 </span>
-                <span className="p-2 line-clamp-1 text-sm text-gray-500 dark:text-zinc-400 ">
+                <span className="p-2 line-clamp-2 text-sm text-gray-500 dark:text-zinc-400 ">
                   ou em até{" "}
                   <b className="">
                     10x de R$ {(parseInt(product.price) * 1.2) / 10}
                   </b>
                 </span>
+              </div>
+            </div>{" "}
+            <div className="md:hidden flex justify-center flex-col w-full gap-2">
+              <Link
+                href={`/carrinho`}
+                className="cursor-pointer content-center justify-center mx-auto"
+              >
+                <Button
+                  size="lg"
+                  className="text-lg h-8 mx-auto w-[90vw] cursor-pointer dark:text-white font-bold dark:bg-chart-2"
+                >
+                  Comprar
+                </Button>
+              </Link>
+
+              <Button
+                onClick={() => addToCart(product)}
+                className="h-8 mx-auto w-[90vw] cursor-pointer dark:text-white justify-around font-semibold dark:bg-chart-2/80"
+              >
+                {" "}
+                adicionar ao carrinho
+                <ShoppingCartIcon
+                  size={24}
+                  className="!size-6 cursor-pointer dark:text-white"
+                />
+              </Button>
+            </div>
+            <div className="flex w-full flex-col items-end">
+              <div className="items-center">
+                <p className="flex-1 items-center flex flex-row gap-2 my-1 content-center text-start w-full max-w-48 text-nowrap">
+                  <RiTruckFill size={20} color="primary" /> Calcular Frete{" "}
+                </p>
+                <ShippingCalculatorInput />
               </div>
             </div>
             <div className="mt-auto my-2">

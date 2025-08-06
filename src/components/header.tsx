@@ -59,11 +59,15 @@ export default function Header() {
     return (total += cartItem.quantity);
   }, 0);
 
-  const iconColor = theme === "light" ? "hsl(346.8, 77.2%, 49.8%)" : "white";
+  const iconColor = theme === "light" ? "hsl(240 11% 13.9%)" : "white";
 
   return (
     <header
-      className={`${isHomePage && isAtTop ? "bg-transparent dark:bg-[#09090a]/80 border-transparent" : "bg-white dark:bg-[#09090a]/80"} mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}
+      className={`${
+        isHomePage && isAtTop
+          ? "bg-transparent dark:bg-[#09090a]/80 border-transparent"
+          : "bg-white dark:bg-[#09090a]/80"
+      } mt-0 p-1 w-full transition-all ease-in-out duration-500 border-b border-accent dar:border-border fixed z-20`}
     >
       <div className="flex max-w-7xl mx-auto items-center justify-between gap-4 p-1">
         <div className="md:flex flex-start max-w-fit hidden text-xl grow-2 list-none">
@@ -83,7 +87,11 @@ export default function Header() {
                     >
                       <NavigationMenuTrigger
                         noArrow={!menuItem.hasDropDownMenu}
-                        className={`${router === menuItem.href ? "text-primary" : "bg-transparent"} rounded-full`}
+                        className={`${
+                          router === menuItem.href
+                            ? "text-primary"
+                            : "bg-transparent"
+                        } rounded-full`}
                       >
                         <span className="cursor-pointer rounded transition-all ease-in-out duration-200 p-2">
                           {menuItem.title}
@@ -121,21 +129,27 @@ export default function Header() {
         </div>
         <div className=" flex flex-end gap-4">
           <HoverCard openDelay={40}>
-            <HoverCardTrigger className="flex flex-row" href="/products">
+            <HoverCardTrigger className="flex flex-row" href="/cart">
               <ShoppingCart
                 color={iconColor}
-                fill={`${numberOfProductsOnCart > 0 ? `${iconColor}` : "transparent"}`}
+                fill={`${
+                  numberOfProductsOnCart > 0 ? `${iconColor}` : "transparent"
+                }`}
                 size={30}
                 className="my-1 ml-1 rotate-y-180 content-end transition-all ease-in-out duration-200"
               />
               <div
-                className={`rounded-full w-5 h-5 text-sm flex content-center items-center justify-center m-auto text-white dark:text-black ${numberOfProductsOnCart > 0 ? "bg-primary" : ""} `}
+                className={`rounded-full w-5 h-5 text-sm flex content-center items-center justify-center m-auto text-white dark:text-black ${
+                  numberOfProductsOnCart > 0 ? "bg-primary" : ""
+                } `}
               >
                 {numberOfProductsOnCart === 0 ? "" : numberOfProductsOnCart}
               </div>
             </HoverCardTrigger>
             <HoverCardContent
-              className={`z-20 ${cart.length === 0 ? "w-fit h-[60px]" : "h-[400px]"} overflow-auto flex flex-col`}
+              className={`z-20 ${
+                cart.length === 0 ? "w-fit h-[60px]" : "h-[400px]"
+              } overflow-auto flex flex-col`}
             >
               {cart.length === 0 ? (
                 <span className="m-auto">Empty Cart</span>
@@ -157,7 +171,11 @@ export default function Header() {
 
             <button
               onClick={handleMenuOpening}
-              className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-400 ease-in-out ${open ? "invisible opacity-0 translate-x-[20px]" : "translate-x-0 opacity-100"}`}
+              className={`relative cursor-pointer ml-auto justify-end flex h-10 w-10 shrink-0 p-0 m-0 overflow-hidden transition-all duration-400 ease-in-out ${
+                open
+                  ? "invisible opacity-0 translate-x-[20px]"
+                  : "translate-x-0 opacity-100"
+              }`}
             >
               <Menu
                 size={30}

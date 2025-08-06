@@ -6,6 +6,7 @@ import { writeFile } from "fs/promises";
 import { z } from "zod";
 import { CreateProduct } from "@/app/database/productsMethods";
 import { description } from "@/components/chart-area-interactive";
+import { Decimal } from "decimal.js";
 
 const productSchema = z.object({
   title: z.string(),
@@ -88,7 +89,7 @@ export async function POST(request: NextRequest) {
   }
   const product = {
     title: productData.title,
-    price: parseInt(productData.price),
+    price: new Decimal(productData.price).toDecimalPlaces(4).toFixed(4),
     stock: parseInt(productData.stock),
     description: productData.description,
   };

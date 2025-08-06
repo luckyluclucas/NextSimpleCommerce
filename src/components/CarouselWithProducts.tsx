@@ -13,6 +13,7 @@ import { Star } from "lucide-react";
 import { product } from "@/app/types/product";
 import slugify from "slugify";
 import { useTheme } from "next-themes";
+import { useEffect } from "react";
 
 export default function CarouselWithProduct({
   products,
@@ -37,8 +38,10 @@ export default function CarouselWithProduct({
   if (IsMobile) {
     products = products.slice(0, 3);
   }
-
-  const iconColor = theme === "light" ? "hsl(346.8, 77.2%, 49.8%)" : "white";
+  let iconColor;
+  useEffect(() => {
+    iconColor = theme === "light" ? "hsl(240 11% 13.9%)" : "white";
+  }, []);
 
   return (
     <>
@@ -64,7 +67,9 @@ export default function CarouselWithProduct({
                   >
                     <ProductCard
                       product={product}
-                      productLink={`product/${product.id}/${slugify(product.title)}`}
+                      productLink={`product/${product.id}/${slugify(
+                        product.title
+                      )}`}
                     />
                   </CarouselItem>
                 ))}

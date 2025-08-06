@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
         </CardContent>
 
         <CardHeader className="p-1 m-0">
-          <CardTitle className="text-base h-[3em] font-semibold line-clamp-3">
+          <CardTitle className="text-base font-semibold line-clamp-3 h-[3em]">
             {product.title}
           </CardTitle>
           <span className="text-sm mt-0 text-gray-600 dark:text-zinc-400">
@@ -50,13 +50,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, productLink }) => {
       </Link>
       <div className="mx-1 mb-1">
         <Button
+          onClick={() => {}}
+          className="cursor-pointer w-full  bg-primary hover:bg-primary/70 dark:text-black dark:hover:text-accent"
+        >
+          Comprar
+        </Button>
+        <Button
           onClick={() => {
             addToCart(product);
           }}
-          className="cursor-pointer w-full  bg-primary hover:bg-primary/70 dark:text-black dark:hover:text-accent"
+          className="cursor-pointer w-full text-sm text-black my-1 bg-transparent dark:text-white hover:bg-primary/70  dark:hover:text-accent"
         >
           <ShoppingCart />
-          Comprar
+          Adicionar ao Carrinho
         </Button>
       </div>
     </Card>

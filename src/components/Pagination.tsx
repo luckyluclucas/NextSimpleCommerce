@@ -50,7 +50,7 @@ export default function ProductsPagination({
         <PaginationItem className="text-white">
           <PaginationPrevious
             onClick={() => setCurrentPage(parseInt(page) - 1)}
-            className="dark:!text-white !text-black !text-lg"
+            className="dark:!text-white text-black !text-sm hover:text-white"
             href="#"
           />
         </PaginationItem>
@@ -60,7 +60,7 @@ export default function ProductsPagination({
             <PaginationLink
               isActive={p === currentPage}
               onClick={() => setCurrentPage(Number(p))}
-              className="dark:!text-white !text-black !text-lg"
+              className="dark:!text-white text-black !text-sm hover:text-white"
               href="#"
             >
               {p}
@@ -68,12 +68,12 @@ export default function ProductsPagination({
           </PaginationItem>
         ))}
         <PaginationItem>
-          <PaginationEllipsis className="" />
+          <PaginationEllipsis className="text-black dark:text-white" />
         </PaginationItem>
         <PaginationItem>
           <PaginationNext
             onClick={() => setCurrentPage(parseInt(page) + 1)}
-            className="dark:!text-white !text-black !text-lg"
+            className="dark:!text-white text-black !text-sm hover:text-white"
             href="#"
           />
         </PaginationItem>

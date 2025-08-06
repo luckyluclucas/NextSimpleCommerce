@@ -74,10 +74,16 @@ exports.up = (pgm) => {
   pgm.createTable("products", {
     id: "id",
     title: { type: "varchar(255)", notNull: true },
-    price: { type: "decimal(10, 2)", notNull: true },
+    price: { type: "decimal(10, 4)", notNull: true },
     description: { type: "text", notNull: true },
     stock: { type: "integer", notNull: true },
+    width: { type: "numeric(10,2)", notNull: true },
+    height: { type: "numeric(10,2)", notNull: true },
+    length: { type: "numeric(10,2)", notNull: true },
+    weight: { type: "numeric(10,3)", notNull: true },
     isActive: { type: "boolean", default: true },
+    is_freeShipping_enable: { type: "boolean", default: false },
+    is_in_promotion: { type: "boolean", default: false },
     created_at: {
       type: "timestamp",
       notNull: true,
@@ -105,6 +111,49 @@ exports.up = (pgm) => {
       type: "timestamp",
       notNull: true,
       default: pgm.func("CURRENT_TIMESTAMP"),
+    },
+    updated_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CURRENT_TIMESTAMP"),
+    },
+  });
+  pgm.createTable("cart", {
+    id: "id",
+    user_id: {
+      type: "integer",
+      notNull: true,
+      references: "user(id)",
+      onDelete: "CASCADE",
+      unique: true,
+    },
+    created_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CaURRENT_TIMESTAMP"),
+    },
+    updated_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CURRENT_TIMESTAMP"),
+    },
+  });
+
+  pgm.createTable("cart_items", {
+    id: "id",
+    user_id: { type: "integer", references: "user(id)", onDelete: "CASCADE" },
+    cart_id: { type: "integer", references: "cart(id)", onDelete: "CASCADE" },
+    product_id: {
+      type: "integer",
+      references: "product(id",
+      notNull: true,
+      onDelete: "CASCADE",
+    },
+    quantity: { type: "integer" },
+    created_at: {
+      type: "timestamp",
+      notNull: true,
+      default: pgm.func("CaURRENT_TIMESTAMP"),
     },
     updated_at: {
       type: "timestamp",

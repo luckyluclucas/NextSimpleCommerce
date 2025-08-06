@@ -7,9 +7,9 @@ import { AdminDashboard } from "../dashboard/adminDashboard";
 
 export default async function MyAccountPage() {
   const session = await auth();
-
+  console.log(session);
   if (!session) {
-    return redirect("/signIn");
+    redirect("/signIn");
   }
 
   if (session.user?.role === "admin") {

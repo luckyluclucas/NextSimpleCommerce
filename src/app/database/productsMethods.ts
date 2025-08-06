@@ -1,10 +1,11 @@
 import "server-only";
 import pool from "./pool";
+import Decimal from "decimal.js";
 
 type product = {
   title: string;
   stock: number;
-  price: number;
+  price: Decimal;
   description: string;
 };
 

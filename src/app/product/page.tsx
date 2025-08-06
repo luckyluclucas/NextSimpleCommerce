@@ -39,8 +39,8 @@ export default async function ProductsPage({
   const totalNumberOfProducts = await getTotalNumberOfProducts();
 
   return (
-    <div className="p-0 my-0 mx-auto flex flex-col h-full font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-1 row-start-2 h-full items-center sm:items-start z-0">
+    <div className="p-0 my-0 mx-auto flex flex-col h-screen font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-1 h-full row-start-ẁ items-center sm:items-start z-0">
         <div className="flex w-full flex-col p-0 mx-auto mt-12">
           <ProductsPagination
             totalNumberOfPages={totalNumberOfProducts - 20}
@@ -65,9 +65,11 @@ export default async function ProductsPage({
             </div>
           </div>
         </div>
-        <ProductsPagination
-          totalNumberOfPages={totalNumberOfProducts - 20}
-        ></ProductsPagination>
+        <div className="mt-auto mx-auto">
+          <ProductsPagination
+            totalNumberOfPages={totalNumberOfProducts - 20}
+          ></ProductsPagination>
+        </div>
       </main>
     </div>
   );
