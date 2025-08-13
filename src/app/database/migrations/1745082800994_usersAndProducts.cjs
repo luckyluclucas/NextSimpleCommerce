@@ -71,6 +71,16 @@ exports.up = (pgm) => {
     { primaryKey: ["identifier", "token"] }
   );
 
+  pgm.createTable("product_types", {
+    id: "id",
+    name: { type: "text", notNull: true, unique: true },
+  });
+
+  pgm.createTable("categories", {
+    id: "id",
+    name: { type: "text", notNull: true, unique: true },
+  });
+
   pgm.createTable("products", {
     id: "id",
     title: { type: "varchar(255)", notNull: true },
@@ -84,6 +94,11 @@ exports.up = (pgm) => {
     isActive: { type: "boolean", default: true },
     is_freeShipping_enable: { type: "boolean", default: false },
     is_in_promotion: { type: "boolean", default: false },
+    product_type: {
+      type: "integer",
+      notNull: true,
+      references: "product_types(id)",
+    },
     created_at: {
       type: "timestamp",
       notNull: true,
@@ -161,6 +176,74 @@ exports.up = (pgm) => {
       default: pgm.func("CURRENT_TIMESTAMP"),
     },
   });
+
+  pgm.createTable(
+    "product_categories",
+    {
+      category_id: {
+        type: "integer",
+        references: "categories(id)",
+        notNull: true,
+        onDelete: "CASCADE",
+      },
+      product_id: {
+        type: "integer",
+        references: "products(id)",
+        notNull: true,
+        onDelete: "CASCADE",
+      },
+    },
+    { primaryKey: ["product_id", "category_id"] }
+  );
+
+  pgm.createTable("mouse_details", {
+    id: "id",
+    product_id: {
+      type: "integer",
+      references: "products(id)",
+      onDelete: "CASCADE",
+      notNull: true,
+    },
+    brand: { type: "text", notNull: true },
+    model_name: { type: "text", notNull: true },
+    switches: { type: "text", notNull: true },
+    mcu: { type: "text", notNull: true },
+    sensor: { type: "text", notNull: true },
+    weight: { type: "integer", notNull: true },
+    wireless: { type: "boolean", notNull: true },
+    pollingrate: { type: "integer", notNull: true },
+  });
+
+  pgm.createTable("keyboard_details", {
+    id: "id",
+    product_id: {
+      type: "integer",
+      references: "products(id)",
+      onDelete: "CASCADE",
+      notNull: true,
+    },
+    brand: { type: "text", notNull: true },
+    model_name: { type: "text", notNull: true },
+    switches: { type: "text", notNull: true },
+    layout: { type: "text", notNull: true },
+    language: { type: "text", notNull: true },
+    isMagnetic: { type: "boolean", notNull: true },
+    isMechanical: { type: "boolean", notNull: true },
+    wireless: { type: "boolean", notNull: true },
+    pollingrate: { type: "integer" },
+  });
+
+  pgm.sql(`
+    INSERT INTO product_types (name) VALUES 
+    ('mouse'), 
+    ('keyboard')
+    ON CONFLICT (name) DO NOTHING;`);
+
+  pgm.sql(`
+    INSERT INTO categories (name) VALUES
+    ('mouse'),
+    ('keyboard')
+    ON CONFLICT (name) DO NOTHING;`);
 };
 
 /**

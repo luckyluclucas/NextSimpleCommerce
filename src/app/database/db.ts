@@ -1,6 +1,6 @@
 import "server-only";
 import pool from "./pool";
-import { product } from "../types/product";
+import { keyboardDetails, mouseDetails, product } from "../types/product";
 
 export async function fetchPaginatedProducts(offset: number, limit: number) {
   if (offset === undefined || limit === undefined) {
@@ -64,28 +64,75 @@ export async function getProductById(id: string): Promise<product | undefined> {
   }
 
   try {
-    const Data = await pool.query(
+    const client = await pool.connect();
+    const Data = await client.query(
       `
-      SELECT products.*,
-      COALESCE(
-          json_agg(
-            json_build_object(
-              'id', product_image.id,
-              'imageUrl', product_image.image_url,
-              'altText', product_image.alt_text,
-              'isMain', product_image.is_main
-            )
-          ) FILTER (WHERE product_image.id IS NOT NULL),
-          '[]'
-        ) AS images
-      FROM products
-      LEFT JOIN product_image ON products.id = product_image.product_id
-      WHERE products.id = $1
-      GROUP BY products.id;
+   SELECT 
+  products.*,
+  COALESCE(
+    json_agg(
+      json_build_object(
+        'id', product_image.id,
+        'imageUrl', product_image.image_url,
+        'altText', product_image.alt_text,
+        'isMain', product_image.is_main
+      )
+    ) FILTER (WHERE product_image.id IS NOT NULL),
+    '[]'
+  ) AS images,
+  COALESCE(
+    json_agg(
+      DISTINCT jsonb_build_object(
+        'id', categories.id,
+        'name', categories.name
+      )
+    ) FILTER (WHERE categories.id IS NOT NULL),
+    '[]'
+  ) AS categories
+FROM products
+LEFT JOIN product_image 
+  ON products.id = product_image.product_id
+LEFT JOIN product_categories 
+  ON products.id = product_categories.product_id
+LEFT JOIN categories 
+  ON product_categories.category_id = categories.id
+WHERE products.id = $1
+GROUP BY products.id;
+ 
       `,
       [id]
     );
-    const product: product = await Data.rows[0];
+
+    const { rows } = await client.query(
+      `SELECT name FROM product_types WHERE id = $1`,
+      [Data.rows[0].product_type]
+    );
+
+    const typeName = rows[0].name;
+    let typeDetails: mouseDetails | keyboardDetails | undefined;
+
+    if (typeName === "mouse") {
+      const details = await client.query(
+        "SELECT * FROM mouse_details WHERE product_id = $1",
+        [id]
+      );
+      typeDetails = details.rows[0];
+    }
+
+    if (typeName === "keyboard") {
+      const details = await client.query(
+        "SELECT * FROM keyboard_details WHERE product_id = $1",
+        [id]
+      );
+      typeDetails = details.rows[0];
+    }
+
+    const productRows = await Data.rows[0];
+    const product: product = {
+      ...productRows,
+      type: typeName,
+      typeDetails,
+    };
     return product;
   } catch (error) {
     console.log("error while trying to connnect to database", error);

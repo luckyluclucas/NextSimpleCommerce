@@ -7,6 +7,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import SidebarApp from "@/components/sideBarApp";
 import { ThemeProvider } from "./contexts/themeProvider";
 import { SessionProvider } from "next-auth/react";
+import { Footer } from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,8 +44,11 @@ export default function RootLayout({
             <CartContextProvider>
               <SidebarProvider defaultOpen={false}>
                 <SidebarApp side="left" />
-                <Header />
-                {children}
+                <div className="flex flex-col w-full mx-auto">
+                  <Header />
+                  {children}
+                  <Footer />
+                </div>
               </SidebarProvider>
             </CartContextProvider>
           </ThemeProvider>

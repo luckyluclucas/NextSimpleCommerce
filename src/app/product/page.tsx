@@ -39,7 +39,7 @@ export default async function ProductsPage({
   const totalNumberOfProducts = await getTotalNumberOfProducts();
 
   return (
-    <div className="p-0 my-0 mx-auto flex flex-col h-screen font-[family-name:var(--font-geist-sans)]">
+    <div className="p-0 my-0 mx-auto flex flex-col min-h-screen font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-1 h-full row-start-ẁ items-center sm:items-start z-0">
         <div className="flex w-full flex-col p-0 mx-auto mt-12">
           <ProductsPagination
@@ -47,7 +47,7 @@ export default async function ProductsPage({
           ></ProductsPagination>
           <div className="w-full z-1 mt-1">
             <div className="m-auto w-full flex flex-col px-4 max-w-7xl mx-auto justify-center z-1 rounded-lg">
-              <div className="m-auto w-full flex flex-col md:grid md:grid-cols-3 lg:grid-cols-5 justify-center">
+              <div className="m-auto w-full flex flex-col md:grid md:grid-cols-3 lg:grid-cols-4 justify-center">
                 {products.map((product) => (
                   <div
                     key={product.id}

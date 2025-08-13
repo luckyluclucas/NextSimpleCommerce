@@ -59,11 +59,11 @@ export default function CarouselWithProduct({
               }}
               className="m-auto w-full justify-center h-full"
             >
-              <CarouselContent className="m-auto ml[-4px] py-4">
+              <CarouselContent className="py-4 gap-6 md:gap-1 px-4">
                 {products.map((product: product) => (
                   <CarouselItem
                     key={product.id}
-                    className="sm:basis-1/3 pl-1 md:basis-1/4 lg:basis-1/6 flex justify-center items-center aspect-square rounded-xl"
+                    className="sm:basis-1/3 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 flex max-w-fit"
                   >
                     <ProductCard
                       product={product}
